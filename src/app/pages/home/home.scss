@@ -1,0 +1,60 @@
+body {
+  background-color: #BDC3C7; // cinza-pedra
+  color: #2C3E50; // preto suave para textos
+}
+
+/* Navbar */
+.navbar-brand img {
+  max-height: 40px;
+}
+
+/* Carousel */
+.carousel-item img {
+  height: 800px;
+  object-fit: cover;
+  object-position: top;
+}
+
+/* Filter and Search */
+.container > .d-flex {
+  gap: 10px;
+}
+
+.form-control {
+  min-width: 250px;
+}
+
+/* Cards */
+.card {
+  border-radius: 0.5rem;
+  transition: transform 0.3s ease;
+  background-color: white;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15);
+}
+
+.custom-card {
+  transform: scale(0.9); // Reduz ligeiramente o tamanho
+  transition: transform 0.3s ease;
+}
+
+.custom-card:hover {
+  transform: scale(0.95); // Efeito hover suave (opcional)
+}
+
+/* Footer */
+footer {
+  font-size: 0.9rem;
+}
+
+footer h5, footer h6 {
+  font-weight: 700;
+  color: #F4D03F; // dourado suave
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
