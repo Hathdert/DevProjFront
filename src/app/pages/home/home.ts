@@ -1,11 +1,29 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { InternshipOfferSimple } from '../../models/internship-offer.model';
+import { InternshipOfferService } from '../../services/internship-offer.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-home',
-  imports: [],
   templateUrl: './home.html',
-  styleUrl: './home.scss'
+  styleUrl: './home.scss',
+  standalone: true,
+  imports: [CommonModule],
 })
-export class Home {
+export class Home implements OnInit {
+  offers: InternshipOfferSimple[] = [];
+  showAll = false;
 
+  constructor(private offerService: InternshipOfferService) {}
+
+  ngOnInit(): void {
+    this.offerService.getAllSimpleOffers().subscribe({
+      next: (data) => {
+        this.offers = data;
+      },
+      error: (err) => {
+        console.error('Erro ao buscar ofertas:', err);
+      }
+    });
+  }
 }
