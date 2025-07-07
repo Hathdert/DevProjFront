@@ -1,6 +1,6 @@
 body {
-  background-color: #BDC3C7; // cinza-pedra
-  color: #2C3E50; // preto suave para textos
+  background-color: #BDC3C7; 
+  color: #2C3E50;
 }
 
 /* Navbar */
@@ -37,12 +37,12 @@ body {
 }
 
 .custom-card {
-  transform: scale(0.9); // Reduz ligeiramente o tamanho
+  transform: scale(0.9); 
   transition: transform 0.3s ease;
 }
 
 .custom-card:hover {
-  transform: scale(0.95); // Efeito hover suave (opcional)
+  transform: scale(0.95); 
 }
 
 /* Footer */
@@ -52,9 +52,37 @@ footer {
 
 footer h5, footer h6 {
   font-weight: 700;
-  color: #F4D03F; // dourado suave
+  color: #F4D03F; 
 }
 
 footer a:hover {
   text-decoration: underline;
+}
+
+.card-wrapper::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.card-wrapper::-webkit-scrollbar-track {
+  background: white; 
+  border-radius: 10px;
+}
+
+.card-wrapper::-webkit-scrollbar-thumb {
+  background: #ccc; 
+  border-radius: 10px;
+}
+
+.card-wrapper::-webkit-scrollbar-thumb:hover {
+  background: #aaa; 
+}
+
+.card-wrapper {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari e Edge */
+  }
 }

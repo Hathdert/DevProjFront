@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
 })
 export class Home implements OnInit {
   offers: InternshipOfferSimple[] = [];
+  showAll = false;
 
   constructor(private offerService: InternshipOfferService) {}
 
