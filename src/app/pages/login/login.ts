@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../auth';
+import { AuthService } from '../../auth';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';  
 import { Router } from '@angular/router';
