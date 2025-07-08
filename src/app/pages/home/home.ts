@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { InternshipOfferSimple } from '../../models/internship-offer.model';
 import { InternshipOfferService } from '../../services/internship-offer.service';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home',
