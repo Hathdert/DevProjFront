@@ -3,17 +3,21 @@ import { AuthService } from '../../auth';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';  
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [
     FormsModule,
-    HttpClientModule  
+    HttpClientModule,
+    CommonModule
   ],
   templateUrl: './login.html',
+  styleUrls: ['./login.scss'],
   providers: [AuthService]  
 })
+
 export class LoginComponent {
   username = '';
   password = '';
