@@ -6,6 +6,7 @@ import { Home } from './pages/home/home';
 import { RegisterComponent } from './pages/register/register';
 import { PrivateCompanyProfileComponent } from './pages/private-company-profile/private-company-profile';
 import { CompanyProfileComponent } from './pages/company-profile/company-profile';
+import { Admin } from './pages/admin/admin';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -14,5 +15,6 @@ export const routes: Routes = [
   { path: 'profile-company', component: PrivateCompanyProfileComponent },
   { path: 'company/:id', component: CompanyProfileComponent},
   { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: '**', redirectTo: 'login' }
+  { path: 'admin', component: Admin },
+  { path: '**', redirectTo: 'login' },
 ];
