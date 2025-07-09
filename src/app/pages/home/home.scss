@@ -1,0 +1,96 @@
+body {
+  background-color: #BDC3C7; 
+  color: #2C3E50;
+}
+
+/* Navbar */
+.navbar-brand img {
+  max-height: 40px;
+}
+
+/* Carousel */
+.carousel-item img {
+  height: 850px;
+  object-fit: fill;
+  object-position: top;
+}
+
+@media (max-width: 768px) {
+  .carousel-item img {
+    height: 550px;
+    object-fit: cover;
+    object-position: center;
+  }
+}
+
+/* Filter and Search */
+.container > .d-flex {
+  gap: 10px;
+}
+
+.form-control {
+  min-width: 250px;
+}
+
+/* Cards */
+.card {
+  border-radius: 0.5rem;
+  transition: transform 0.3s ease;
+  background-color: white;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15);
+}
+
+.custom-card {
+  transform: scale(0.9); 
+  transition: transform 0.3s ease;
+}
+
+.custom-card:hover {
+  transform: scale(0.95); 
+}
+
+/* Footer */
+footer {
+  font-size: 0.9rem;
+}
+
+footer h5, footer h6 {
+  font-weight: 700;
+  color: #F4D03F; 
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+.card-wrapper::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.card-wrapper::-webkit-scrollbar-track {
+  background: white; 
+  border-radius: 10px;
+}
+
+.card-wrapper::-webkit-scrollbar-thumb {
+  background: #ccc; 
+  border-radius: 10px;
+}
+
+.card-wrapper::-webkit-scrollbar-thumb:hover {
+  background: #aaa; 
+}
+
+.card-wrapper {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari e Edge */
+  }
+}
