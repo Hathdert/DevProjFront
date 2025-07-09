@@ -21,6 +21,8 @@ export class AuthService {
     return this.http.post<{ token: string }>(`${this.baseUrl}/login`, { username, password }).pipe(
       tap(response => {
         localStorage.setItem('jwtToken', response.token);
+        localStorage.setItem('UserName', username);
+        console.log(localStorage.getItem('UserName'));
       })
     );
   }

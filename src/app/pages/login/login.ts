@@ -25,17 +25,18 @@ export class LoginComponent {
 
   constructor(private auth: AuthService, private router: Router) {}
 
-onSubmit() {
-  this.auth.login(this.username, this.password).subscribe({
-    next: () => {
-      this.errorMessage = '';
-      alert('Login realizado com sucesso!');
-      this.router.navigate(['/home']);
-    },
-    error: () => {
-      this.errorMessage = 'Usuário ou senha inválidos.';
-      alert(this.errorMessage); // ou mostrar em uma div com ngIf
-    }
-  });
+  onSubmit() {
+    this.auth.login(this.username, this.password).subscribe({
+      next: () => {
+        
+        this.errorMessage = '';
+        alert('Login realizado com sucesso!');
+        this.router.navigate(['/home']);
+      },
+      error: () => {
+        this.errorMessage = 'Usuário ou senha inválidos.';
+        alert(this.errorMessage); // ou mostrar em uma div com ngIf
+      }
+    });
   }
 }
