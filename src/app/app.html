@@ -6,27 +6,27 @@
       SkillBridge
     </a>
     <div class="d-flex ms-auto gap-2">
-      <!-- Se navBarValue for null, mostra os botões padrão -->
+      <!-- If navBarValue is null, show default buttons -->
       <ng-container *ngIf="navBarValue === null">
         <button routerLink='/register' class="btn btn-outline-light">Register</button>
         <button routerLink='/login' class="btn btn-light text-dark">Login</button>
       </ng-container>
-      <!-- Se navBarValue for '0' -->
+      <!-- If navBarValue is '0' -->
       <ng-container *ngIf="navBarValue === '0'">
-          <button class="btn btn-outline-light">Gerir Empresas</button>
-          <button class="btn btn-light text-dark">Listar Utilizadores</button>
-          <button class="btn btn-light text-dark">Perfil</button>
+          <button class="btn btn-outline-light">Manage Companies</button>
+          <button class="btn btn-light text-dark">List Users</button>
+          <button class="btn btn-light text-dark">Profile</button>
           <button class="btn btn-light text-dark">Logout</button>
       </ng-container>
-      <!-- Se navBarValue for '1' -->
+      <!-- If navBarValue is '1' -->
       <ng-container *ngIf="navBarValue === '1'">
-          <button class="btn btn-outline-light">Perfil</button>
+          <button class="btn btn-outline-light">Profile</button>
           <button class="btn btn-light text-dark">Logout</button>
       </ng-container>
-      <!-- Se navBarValue for '2' -->
+      <!-- If navBarValue is '2' -->
       <ng-container *ngIf="navBarValue === '2'">
-        <button class="btn btn-outline-light">Criar Oferta</button>
-        <button routerLink='/profile-company' class="btn btn-light text-dark">Perfil</button>
+        <button class="btn btn-outline-light">Create Offer</button>
+        <button routerLink='/profile-company' class="btn btn-light text-dark">Profile</button>
         <button class="btn btn-light text-dark">Logout</button>
       </ng-container>
     </div>
