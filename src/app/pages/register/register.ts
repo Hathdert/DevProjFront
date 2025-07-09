@@ -128,12 +128,16 @@ export class RegisterComponent {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       this.profilePicFile = input.files[0];
+      console.log(`Selected profile picture for ${type}:`, this.profilePicFile);
     }
   }
 
   uploadCompanyProfilePic(companyEmail: string) {
     const formData = new FormData();
     formData.append('file', this.profilePicFile!);
+    console.log('Uploading profile picture for company:', companyEmail);
+    console.log('Profile picture file:', this.profilePicFile);
+    console.log('Form data:', formData);
     formData.append('companyEmail', companyEmail);
     this.http
       .post('http://localhost:8080/api/documents/upload/company', formData)

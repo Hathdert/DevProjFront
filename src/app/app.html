@@ -1,16 +1,36 @@
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg" style="background-color: #C0392B;">
   <div class="container">
-    <a class="navbar-brand d-flex align-items-center text-light" href="#" routerLink= '/home'>
+    <a class="navbar-brand d-flex align-items-center text-light" href="#" routerLink='/home'>
       <img src="assets/images/logo.svg" alt="Logo" height="40" class="me-2" />
       SkillBridge
     </a>
     <div class="d-flex ms-auto gap-2">
-      <button routerLink= '/register' class="btn btn-outline-light">Register</button>
-      <button routerLink= '/login' class="btn btn-light text-dark">Login</button>
+      <!-- Se navBarValue for null, mostra os botões padrão -->
+      <ng-container *ngIf="navBarValue === null">
+        <button routerLink='/register' class="btn btn-outline-light">Register</button>
+        <button routerLink='/login' class="btn btn-light text-dark">Login</button>
+      </ng-container>
+      <!-- Se navBarValue for '0' -->
+      <ng-container *ngIf="navBarValue === '0'">
+          <button class="btn btn-outline-light">Gerir Empresas</button>
+          <button class="btn btn-light text-dark">Listar Utilizadores</button>
+          <button class="btn btn-light text-dark">Perfil</button>
+          <button class="btn btn-light text-dark">Logout</button>
+      </ng-container>
+      <!-- Se navBarValue for '1' -->
+      <ng-container *ngIf="navBarValue === '1'">
+          <button class="btn btn-outline-light">Perfil</button>
+          <button class="btn btn-light text-dark">Logout</button>
+      </ng-container>
+      <!-- Se navBarValue for '2' -->
+      <ng-container *ngIf="navBarValue === '2'">
+        <button class="btn btn-outline-light">Criar Oferta</button>
+        <button routerLink='/profile-company' class="btn btn-light text-dark">Perfil</button>
+        <button class="btn btn-light text-dark">Logout</button>
+      </ng-container>
     </div>
   </div>
 </nav>
-
 
 <router-outlet></router-outlet>
