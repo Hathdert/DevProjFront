@@ -1,1 +1,70 @@
-<p>candidate-profile works!</p>
+<div class="container mt-5" *ngIf="candidate">
+    <h2 class="text-center mb-4 text-danger">Company Profile</h2>
+
+    <div class="card shadow p-4">
+        <div class="row align-items-center">
+            <div class="col-md-4 text-center mb-4 mb-md-0">
+                <div class="col-md-4 text-center mb-4 mb-md-0">
+                    <ng-container *ngIf="candidateImageUrl; else initialBlock">
+                        <img [src]="candidateImageUrl" alt="Company Photo" class="rounded-circle shadow"
+                            style="width: 275px; height: 275px; object-fit: cover;" />
+                    </ng-container>
+                    <ng-template #initialBlock>
+                        <div class="rounded-circle bg-primary text-white d-inline-flex align-items-center justify-content-center"
+                            style="width: 275px; height: 275px; font-size: 4rem; margin-left: 25%;">
+                            {{ candidate?.name?.[0] }}
+                        </div>
+                    </ng-template>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="row" id="container-cadidate" >
+                    <div class="col-md-6 mb-3">
+                        <strong>Name:</strong>
+                        <div>{{ candidate.name }}</div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <strong>Email:</strong>
+                        <div>{{ candidate.email }}</div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <strong>Phone:</strong>
+                        <div>{{ candidate.phone }}</div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <strong>NIF:</strong>
+                        <div>{{ candidate.nipc }}</div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <strong>Birth Date:</strong>
+                        <div>{{ candidate.birthDate | date: 'dd/MM/yyyy' }}</div>
+                    <div class="col-md-6 mb-3">
+                        <strong>Address:</strong>
+                        <div>{{ candidate.address }}</div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Documents Section -->
+    <div class="mt-4">
+        <h5 class="text-danger">Documents</h5>
+        <!--List all company documents here if needed-->
+        <!--
+        <div class="row">
+            <div class="col-md-3 mb-3" *ngFor="let doc of company.documents">
+                <ng-container *ngIf="doc.filePath.endsWith('.pdf'); else imageBlock">
+                    <a [href]="doc.filePath" target="_blank" class="btn btn-outline-danger w-100">
+                        <i class="bi bi-file-earmark-pdf"></i> View PDF
+                    </a>
+                </ng-container>
+                <ng-template #imageBlock>
+                    <img [src]="doc.filePath" alt="Document" class="img-fluid rounded shadow-sm" />
+                </ng-template>
+            </div>
+        </div>
+        -->
+    </div>
+</div>
