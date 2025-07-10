@@ -68,7 +68,7 @@
             {{ company.registrationTime }}
           </p>
           <div class="text-center mt-3">
-            <a href="#" class="btn btn-primary btn-sm">Ver detalhes</a>
+<a href="#" class="btn btn-primary btn-sm" (click)="showDetails(company.id, $event)">Ver detalhes</a>
           </div>
         </div>
       </div>

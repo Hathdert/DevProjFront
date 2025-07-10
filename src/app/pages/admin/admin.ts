@@ -81,6 +81,8 @@ export class Admin implements OnInit {
 
   showDetails(id: number | string, event: Event) {
   event.preventDefault(); 
-  alert(`ID do usuário: ${id}`);
+  alert(`ID: ${id}`);
 }
+
+
 }
