@@ -16,18 +16,18 @@
           <button class="btn btn-outline-light">Manage Companies</button>
           <button class="btn btn-light text-dark">List Users</button>
           <button class="btn btn-light text-dark">Profile</button>
-          <button class="btn btn-light text-dark">Logout</button>
+          <button routerLink="/home" (click)="logout()" class="btn btn-light text-dark">Logout</button>
       </ng-container>
       <!-- If navBarValue is '1' -->
       <ng-container *ngIf="navBarValue === '1'">
           <button class="btn btn-outline-light">Profile</button>
-          <button class="btn btn-light text-dark">Logout</button>
+          <button routerLink="/home" (click)="logout()" class="btn btn-light text-dark">Logout</button>
       </ng-container>
       <!-- If navBarValue is '2' -->
       <ng-container *ngIf="navBarValue === '2'">
         <button class="btn btn-outline-light">Create Offer</button>
         <button routerLink='/profile-company' class="btn btn-light text-dark">Profile</button>
-        <button class="btn btn-light text-dark">Logout</button>
+        <button routerLink="/home" (click)="logout()" class="btn btn-light text-dark">Logout</button>
       </ng-container>
     </div>
   </div>

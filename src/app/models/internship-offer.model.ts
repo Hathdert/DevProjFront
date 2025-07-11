@@ -1,3 +1,6 @@
+import { Application } from "./application.model";
+import { Company } from "./company.model";
+
 export interface InternshipOfferSimple {
   id: number;
   title: string;
@@ -7,4 +10,7 @@ export interface InternshipOfferSimple {
   startDate: string;
   endDate: string;
   vacancies: number;
+  company: Company;
+  isOffer: boolean;
+  applications: Application[];
 }

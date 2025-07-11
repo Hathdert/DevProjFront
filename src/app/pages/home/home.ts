@@ -18,7 +18,7 @@ export class Home implements OnInit {
   constructor(private offerService: InternshipOfferService) {}
 
   ngOnInit(): void {
-    this.offerService.getAllSimpleOffers().subscribe({
+    this.offerService.getAllOffers().subscribe({
       next: (data) => {
         this.offers = data;
       },

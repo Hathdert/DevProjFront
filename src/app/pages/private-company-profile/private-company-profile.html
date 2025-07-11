@@ -21,57 +21,95 @@
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <strong>Name:</strong>
-                        <div>{{ company.name }}</div>
+                        <div *ngIf="!isEditing">{{ company.name }}</div>
+                        <input *ngIf="isEditing" [(ngModel)]="editCompanyData.name" class="form-control" />
                     </div>
                     <div class="col-md-6 mb-3">
                         <strong>Email:</strong>
-                        <div>{{ company.email }}</div>
+                        <div *ngIf="!isEditing">{{ company.email }}</div>
+                        <textarea *ngIf="isEditing" [(ngModel)]="editCompanyData.email" class="form-control"></textarea>
                     </div>
                     <div class="col-md-6 mb-3">
                         <strong>Phone:</strong>
-                        <div>{{ company.phone }}</div>
+                        <div *ngIf="!isEditing">{{ company.phone }}</div>
+                        <textarea *ngIf="isEditing" [(ngModel)]="editCompanyData.phone" class="form-control"></textarea>
                     </div>
                     <div class="col-md-6 mb-3">
                         <strong>NIPC:</strong>
-                        <div>{{ company.nipc }}</div>
+                        <div *ngIf="!isEditing">{{ company.nipc }}</div>
+                        <input *ngIf="isEditing" [(ngModel)]="editCompanyData.nipc" class="form-control"/>
                     </div>
                     <div class="col-md-6 mb-3">
                         <strong>Area:</strong>
-                        <div>{{ company.area }}</div>
+                        <div *ngIf="!isEditing">{{ company.area }}</div>
+                        <input *ngIf="isEditing" [(ngModel)]="editCompanyData.area" class="form-control"/>
                     </div>
                     <div class="col-md-6 mb-3">
                         <strong>Address:</strong>
-                        <div>{{ company.address }}</div>
+                        <div *ngIf="!isEditing">{{ company.address }}</div>
+                        <textarea *ngIf="isEditing" [(ngModel)]="editCompanyData.address"
+                            class="form-control"></textarea>
                     </div>
                     <div class="col-12 mb-3">
                         <strong>Description:</strong>
-                        <div>{{ company.description }}</div>
+                        <div *ngIf="!isEditing">{{ company.description }}</div>
+                        <textarea *ngIf="isEditing" [(ngModel)]="editCompanyData.description"
+                            class="form-control"></textarea>
                     </div>
                     <div class="text-end">
-                        <button class="btn btn-outline-danger" (click)="editCompany()">Edit Profile</button>
+                        <button *ngIf="!isEditing" class="btn btn-outline-danger" (click)="startEdit()">Edit
+                            Profile</button>
+                        <button *ngIf="isEditing" class="btn btn-danger me-2" (click)="saveEdit()">Save</button>
+                        <button *ngIf="isEditing" class="btn btn-secondary" (click)="cancelEdit()">Cancel</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <!-- Documents Section -->
     <div class="mt-4">
-        <h5 class="text-danger">Documents</h5>
-        <!--List all company documents here if needed-->
-        <!--
+        <h5 class="text-danger">Offers</h5>
+        <div class="mb-3">
+            <label for="offerStatusFilter" class="form-label">Filter by status:</label>
+            <select id="offerStatusFilter" class="form-select w-auto d-inline-block ms-2"
+                [(ngModel)]="offerStatusFilter">
+                <option value="all">All</option>
+                <option value="active">Active</option>
+                <option value="inactive">Inactive</option>
+            </select>
+        </div>
         <div class="row">
-            <div class="col-md-3 mb-3" *ngFor="let doc of company.documents">
-                <ng-container *ngIf="doc.filePath.endsWith('.pdf'); else imageBlock">
-                    <a [href]="doc.filePath" target="_blank" class="btn btn-outline-danger w-100">
-                        <i class="bi bi-file-earmark-pdf"></i> View PDF
-                    </a>
-                </ng-container>
-                <ng-template #imageBlock>
-                    <img [src]="doc.filePath" alt="Document" class="img-fluid rounded shadow-sm" />
-                </ng-template>
+            <div class="col-12" style="max-height: 600px; overflow-y: auto;">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>State</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let offer of filteredOffers | slice:0:8" style="cursor:pointer"
+                            (click)="goToOffer(offer.id)">
+                            <td>{{ offer.title }}</td>
+                            <td>{{ offer.description }}</td>
+                            <td>{{ offer.startDate | date }}</td>
+                            <td>{{ offer.endDate | date }}</td>
+                            <td>
+                                <span class="badge bg-success" *ngIf="offer.isOffer">Active</span>
+                                <span class="badge bg-secondary" *ngIf="!offer.isOffer">Inactive</span>
+                            </td>
+                            <td>
+                                <button class="btn btn-outline-danger">
+                                    Change State
+                                </button>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
-        -->
+
     </div>
 </div>
