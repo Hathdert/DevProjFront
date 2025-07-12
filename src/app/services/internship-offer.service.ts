@@ -31,7 +31,7 @@ export class InternshipOfferService {
           endDate: offer.endDate,
           vacancies: offer.vacancies,
           company: offer.company ?? null,
-          isOffer: offer.isOffer ?? false,
+          offer: offer.offer ?? false,
           applications: offer.applications ?? []
         }))
       )

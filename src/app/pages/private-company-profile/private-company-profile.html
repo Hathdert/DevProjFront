@@ -98,8 +98,8 @@
                             <td>{{ offer.startDate | date }}</td>
                             <td>{{ offer.endDate | date }}</td>
                             <td>
-                                <span class="badge bg-success" *ngIf="offer.isOffer">Active</span>
-                                <span class="badge bg-secondary" *ngIf="!offer.isOffer">Inactive</span>
+                                <span class="badge bg-success" *ngIf="offer.offer">Active</span>
+                                <span class="badge bg-secondary" *ngIf="!offer.offer">Inactive</span>
                             </td>
                             <td>
                                 <button class="btn btn-outline-danger">

@@ -60,9 +60,9 @@ export class PrivateCompanyProfileComponent {
     if (!this.offers) return [];
     if (this.offerStatusFilter === 'all') return this.offers;
     if (this.offerStatusFilter === 'active')
-      return this.offers.filter((o) => o.isOffer);
+      return this.offers.filter((o) => o.offer);
     if (this.offerStatusFilter === 'inactive')
-      return this.offers.filter((o) => !o.isOffer);
+      return this.offers.filter((o) => !o.offer);
     return this.offers;
   }
 
