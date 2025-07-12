@@ -15,18 +15,18 @@
           <button class="btn btn-outline-light px-4 py-2 rounded-pill">Manage Companies</button> 
           <button class="btn btn-light text-dark px-4 py-2 rounded-pill">List Users</button>
           <button class="btn btn-light text-dark px-4 py-2 rounded-pill">Profile</button>
-          <button class="btn btn-light text-dark px-4 py-2 rounded-pill">Logout</button>
+          <button  routerLink="/home" (click)="logout()"  class="btn btn-light text-dark px-4 py-2 rounded-pill">Logout</button>
       </ng-container>
       <!-- If navBarValue is '1' -->
       <ng-container *ngIf="navBarValue === '1'">
-          <button class="btn btn-outline-light">Profile</button>
-          <button class="btn btn-light text-dark">Logout</button>
+          <button class="btn btn-outline-light px-4 py-2 rounded-pill">Profile</button>
+          <button  routerLink="/home" (click)="logout()"  class="btn btn-light text-dark px-4 py-2 rounded-pill">Logout</button>
       </ng-container>
       <!-- If navBarValue is '2' -->
       <ng-container *ngIf="navBarValue === '2'">
         <button class="btn btn-outline-light px-4 py-2 rounded-pill">Create Offer</button>
         <button routerLink='/profile-company' class="btn btn-light text-dark px-4 py-2 rounded-pill">Profile</button>
-        <button class="btn btn-light text-dark px-4 py-2 rounded-pill">Logout</button>
+        <button  routerLink="/home" (click)="logout()"  class="btn btn-light text-dark px-4 py-2 rounded-pill">Logout</button>
       </ng-container>
     </div>
 </nav>

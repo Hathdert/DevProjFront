@@ -44,7 +44,6 @@ export class PrivateCompanyProfileComponent {
         this.offerService.getOffersByCompanyId(this.company.id).subscribe({
           next: (offers: InternshipOfferSimple[]) => {
             this.offers = offers;
-            console.log('Offers fetched successfully:', this.offers);
           },
           error: (err) => {
             console.error('Error fetching offers:', err);
