@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { CandidateService } from '../../services/candidate.service';
 import { CommonModule } from '@angular/common';
 import { DocumentService } from '../../services/document.service';
+import { Candidate } from '../../models/candidate.model';
 
 @Component({
   selector: 'app-candidate-profile',
@@ -11,9 +12,10 @@ import { DocumentService } from '../../services/document.service';
   styleUrl: './candidate-profile.scss'
 })
 export class CandidateProfile {
-  id: number = parseInt(window.location.pathname.split('/').pop() || '0', 10);
-  candidate: any | null = null;
+  candidate: Candidate | null = null;
   candidateImageUrl: string | null = null;
+  isEditing = false;
+   editCandidateData: Candidate = {} as Candidate;
 
   constructor(
     private router: Router,
@@ -23,9 +25,8 @@ export class CandidateProfile {
 
   ngOnInit() {
     this.candidateService.getCandidateByToken().subscribe({
-      next: (data: any) => {
+      next: (data: Candidate) => {
         this.candidate = data;
-        console.log('Perfil do candidato:', this.candidate);
         this.documentService
           .getCandidateFirstImage(this.candidate.id)
           .subscribe((blob) => {
