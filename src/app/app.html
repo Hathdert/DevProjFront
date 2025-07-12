@@ -1,16 +1,34 @@
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg" style="background-color: #C0392B;">
-  <div class="container">
-    <a class="navbar-brand d-flex align-items-center text-light" href="#" routerLink= '/home'>
-      <img src="assets/images/logo.svg" alt="Logo" height="40" class="me-2" />
+<nav class="navbar navbar-expand-lg px-5" style="background-color: #C0392B;">
+    <a class="navbar-brand d-flex align-items-center text-light" href="#" routerLink='/home'>
+      <img src="assets/images/logo.svg" alt="Logo" height="70" class="me-2" />
       SkillBridge
     </a>
     <div class="d-flex ms-auto gap-2">
-      <button routerLink= '/register' class="btn btn-outline-light">Register</button>
-      <button routerLink= '/login' class="btn btn-light text-dark">Login</button>
+      <!-- If navBarValue is null, show default buttons -->
+      <ng-container *ngIf="navBarValue === null">
+        <button routerLink='/register' class="btn btn-outline-light px-4 py-2 rounded-pill">Register</button>
+        <button routerLink='/login' class="btn btn-light text-dark px-4 py-2 rounded-pill">Login</button>
+      </ng-container>
+      <!-- If navBarValue is '0' -->
+      <ng-container *ngIf="navBarValue === '0'">
+          <button class="btn btn-outline-light px-4 py-2 rounded-pill">Manage Companies</button> 
+          <button class="btn btn-light text-dark px-4 py-2 rounded-pill">List Users</button>
+          <button class="btn btn-light text-dark px-4 py-2 rounded-pill">Profile</button>
+          <button  routerLink="/home" (click)="logout()"  class="btn btn-light text-dark px-4 py-2 rounded-pill">Logout</button>
+      </ng-container>
+      <!-- If navBarValue is '1' -->
+      <ng-container *ngIf="navBarValue === '1'">
+          <button class="btn btn-outline-light px-4 py-2 rounded-pill">Profile</button>
+          <button  routerLink="/home" (click)="logout()"  class="btn btn-light text-dark px-4 py-2 rounded-pill">Logout</button>
+      </ng-container>
+      <!-- If navBarValue is '2' -->
+      <ng-container *ngIf="navBarValue === '2'">
+        <button class="btn btn-outline-light px-4 py-2 rounded-pill">Create Offer</button>
+        <button routerLink='/profile-company' class="btn btn-light text-dark px-4 py-2 rounded-pill">Profile</button>
+        <button  routerLink="/home" (click)="logout()"  class="btn btn-light text-dark px-4 py-2 rounded-pill">Logout</button>
+      </ng-container>
     </div>
-  </div>
 </nav>
-
 
 <router-outlet></router-outlet>

@@ -12,16 +12,16 @@ import { FormsModule } from '@angular/forms';
   selector: 'app-company-profile',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './company-profile.html',
-  styleUrls: ['./company-profile.scss'],
+  templateUrl: './private-company-profile.html',
+  styleUrls: ['./private-company-profile.scss'],
 })
-export class CompanyProfileComponent {
-  id: number = parseInt(window.location.pathname.split('/').pop() || '0', 10);
+export class PrivateCompanyProfileComponent {
   company: Company | null = null;
   companyImageUrl: string | null = null;
   offers: InternshipOfferSimple[] = [];
   offerStatusFilter: 'all' | 'active' | 'inactive' = 'all';
-  showAll = false;
+  isEditing = false;
+  editCompanyData: Company = {} as Company;
 
   constructor(
     private router: Router,
@@ -31,9 +31,8 @@ export class CompanyProfileComponent {
   ) {}
 
   ngOnInit() {
-    this.companyService.getCompanyById(this.id).subscribe({
+    this.companyService.getCompanyByToken().subscribe({
       next: (data: Company) => {
-        
         this.company = data;
 
         this.documentService
@@ -71,4 +70,31 @@ export class CompanyProfileComponent {
     this.router.navigate(['/offer', offerId]);
   }
 
+  startEdit() {
+    this.isEditing = true;
+    this.editCompanyData = {
+      ...(this.company as Company),
+      name: this.company?.name ?? '',
+      email: this.company?.email ?? '',
+      phone: this.company?.phone ?? '',
+      nipc: this.company?.nipc ?? 0,
+      area: this.company?.area ?? '',
+      address: this.company?.address ?? '',
+      description: this.company?.description ?? '',
+    };
+  }
+
+  cancelEdit() {
+    this.isEditing = false;
+  }
+
+  saveEdit() {
+    this.companyService.editCompany(this.editCompanyData).subscribe({
+      next: (updated: Company) => {
+        this.company = updated;
+        this.isEditing = false;
+      },
+      error: () => alert('Failed to update company'),
+    });
+  }
 }

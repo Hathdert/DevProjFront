@@ -1,0 +1,82 @@
+body {
+  background-color: #BDC3C7; 
+  color: #2C3E50;
+}
+
+/* Cards */
+.card-scroll-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 1rem;
+}
+
+.card-row {
+  white-space: nowrap;
+  min-height: 420px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.card {
+  border-radius: 0.75rem;
+  box-shadow: 0 0.5rem 1.5rem rgba(44,62,80,0.10);
+  transition: transform 0.3s, box-shadow 0.3s;
+  background: #fff;
+  border: none;
+  width: 300px;
+  display: inline-block;
+  vertical-align: top;
+  margin-bottom: 0;
+}
+
+.card:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 1rem 2rem rgba(44,62,80,0.15);
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #C0392B;
+}
+
+.card-text {
+  font-size: 1rem;
+  color: #566573;
+}
+
+.btn {
+  background-color: #C0392B;
+  color: #fff;
+  border: none;
+}
+
+.btn:hover {
+  background-color: #A93226;
+  color: #fff;
+}
+
+.badge {
+  background-color: #2C3E50;
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* Espaço extra entre título e cards */
+.container.mt-5 > .row {
+  margin-top: 2.5rem;
+}
+
+/* Espaço extra entre os cards */
+.row.g-4, .row.g-5 {
+  row-gap: 2rem;
+  column-gap: 2rem;
+}
+
+/* Opcional: mais espaço abaixo do título */
+h2.display-6 {
+  margin-bottom: 2.5rem;
+}

@@ -1,1 +1,93 @@
-<p>company-profile works!</p>
+<div class="container mt-5" *ngIf="company">
+    <h2 class="text-center mb-4 text-danger">Company Profile</h2>
+
+    <div class="card shadow p-4">
+        <div class="row align-items-center">
+            <div class="col-12 col-md-4 text-center mb-4 mb-md-0">
+                <div class="col-12 text-center mb-4 mb-md-0">
+                    <ng-container *ngIf="companyImageUrl; else initialBlock">
+                        <img [src]="companyImageUrl" alt="Company Photo" class="rounded-circle shadow"
+                            style="width: 100%; max-width: 275px; height: 275px; object-fit: cover;" />
+                    </ng-container>
+                    <ng-template #initialBlock>
+                        <div class="rounded-circle bg-primary text-white d-inline-flex align-items-center justify-content-center"
+                            style="width: 100%; max-width: 275px; height: 275px; font-size: 4rem;">
+                            {{ company?.name?.[0] }}
+                        </div>
+                    </ng-template>
+                </div>
+            </div>
+            <div class="col-12 col-md-8">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <strong>Name:</strong>
+                        <div>{{ company.name }}</div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <strong>Email:</strong>
+                        <div>{{ company.email }}</div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <strong>Phone:</strong>
+                        <div>{{ company.phone }}</div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <strong>NIPC:</strong>
+                        <div>{{ company.nipc }}</div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <strong>Area:</strong>
+                        <div>{{ company.area }}</div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <strong>Address:</strong>
+                        <div>{{ company.address }}</div>
+                    </div>
+                    <div class="col-12 mb-3">
+                        <strong>Description:</strong>
+                        <div>{{ company.description }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <h5 class="text-danger">Offers</h5>
+        <div class="mb-3">
+            <label for="offerStatusFilter" class="form-label">Filter by status:</label>
+            <select id="offerStatusFilter" class="form-select w-auto d-inline-block ms-2"
+                [(ngModel)]="offerStatusFilter">
+                <option value="all">All</option>
+                <option value="active">Active</option>
+                <option value="inactive">Inactive</option>
+            </select>
+        </div>
+        <!-- Offers Cards -->
+        <div class="container">
+            <div class="card-wrapper" style="max-height: 750px; overflow-y: auto;">
+                <div class="row g-4" id="offers-list">
+                    <div class="col-md-4" *ngFor="let offer of filteredOffers.slice(0, showAll ? offers.length : 6)">
+                        <div class="card h-100 shadow-sm">
+                            <img src="assets/images/IT.JPG" class="card-img-top" alt="Offer Image" />
+                            <div class="card-body">
+                                <h5 class="card-title">{{ offer.title }}</h5>
+                                <p class="card-text">{{ offer.description }}</p>
+                                <p class="card-text">
+                                    <strong>Start Date:</strong> {{ offer.startDate | date }}<br />
+                                    <strong>End Date:</strong> {{ offer.endDate | date }}
+                                </p>
+                                <td>
+                                    <span class="badge bg-success" *ngIf="offer.isOffer">Active</span>
+                                    <span class="badge bg-secondary" *ngIf="!offer.isOffer">Inactive</span>
+                            </div>
+                            <div class="text-center" style="margin-bottom: 5%;">
+                                <a href="#" class="btn text-light" style="background-color: #C0392B;">View Offer</a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

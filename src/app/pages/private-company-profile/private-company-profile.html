@@ -1,0 +1,115 @@
+<div class="container mt-5" *ngIf="company">
+    <h2 class="text-center mb-4 text-danger">Company Profile</h2>
+
+    <div class="card shadow p-4">
+        <div class="row align-items-center">
+            <div class="col-12 col-md-4 text-center mb-4 mb-md-0">
+                <div class="col-12 text-center mb-4 mb-md-0">
+                    <ng-container *ngIf="companyImageUrl; else initialBlock">
+                        <img [src]="companyImageUrl" alt="Company Photo" class="rounded-circle shadow"
+                            style="width: 100%; max-width: 275px; height: 275px; object-fit: cover;" />
+                    </ng-container>
+                    <ng-template #initialBlock>
+                        <div class="rounded-circle bg-primary text-white d-inline-flex align-items-center justify-content-center"
+                            style="width: 100%; max-width: 275px; height: 275px; font-size: 4rem;">
+                            {{ company?.name?.[0] }}
+                        </div>
+                    </ng-template>
+                </div>
+            </div>
+            <div class="col-12 col-md-8">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <strong>Name:</strong>
+                        <div *ngIf="!isEditing">{{ company.name }}</div>
+                        <input *ngIf="isEditing" [(ngModel)]="editCompanyData.name" class="form-control" />
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <strong>Email:</strong>
+                        <div *ngIf="!isEditing">{{ company.email }}</div>
+                        <textarea *ngIf="isEditing" [(ngModel)]="editCompanyData.email" class="form-control"></textarea>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <strong>Phone:</strong>
+                        <div *ngIf="!isEditing">{{ company.phone }}</div>
+                        <textarea *ngIf="isEditing" [(ngModel)]="editCompanyData.phone" class="form-control"></textarea>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <strong>NIPC:</strong>
+                        <div *ngIf="!isEditing">{{ company.nipc }}</div>
+                        <input *ngIf="isEditing" [(ngModel)]="editCompanyData.nipc" class="form-control"/>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <strong>Area:</strong>
+                        <div *ngIf="!isEditing">{{ company.area }}</div>
+                        <input *ngIf="isEditing" [(ngModel)]="editCompanyData.area" class="form-control"/>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <strong>Address:</strong>
+                        <div *ngIf="!isEditing">{{ company.address }}</div>
+                        <textarea *ngIf="isEditing" [(ngModel)]="editCompanyData.address"
+                            class="form-control"></textarea>
+                    </div>
+                    <div class="col-12 mb-3">
+                        <strong>Description:</strong>
+                        <div *ngIf="!isEditing">{{ company.description }}</div>
+                        <textarea *ngIf="isEditing" [(ngModel)]="editCompanyData.description"
+                            class="form-control"></textarea>
+                    </div>
+                    <div class="text-end">
+                        <button *ngIf="!isEditing" class="btn btn-outline-danger" (click)="startEdit()">Edit
+                            Profile</button>
+                        <button *ngIf="isEditing" class="btn btn-danger me-2" (click)="saveEdit()">Save</button>
+                        <button *ngIf="isEditing" class="btn btn-secondary" (click)="cancelEdit()">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mt-4">
+        <h5 class="text-danger">Offers</h5>
+        <div class="mb-3">
+            <label for="offerStatusFilter" class="form-label">Filter by status:</label>
+            <select id="offerStatusFilter" class="form-select w-auto d-inline-block ms-2"
+                [(ngModel)]="offerStatusFilter">
+                <option value="all">All</option>
+                <option value="active">Active</option>
+                <option value="inactive">Inactive</option>
+            </select>
+        </div>
+        <div class="row">
+            <div class="col-12" style="max-height: 600px; overflow-y: auto;">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>State</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let offer of filteredOffers | slice:0:8" style="cursor:pointer"
+                            (click)="goToOffer(offer.id)">
+                            <td>{{ offer.title }}</td>
+                            <td>{{ offer.description }}</td>
+                            <td>{{ offer.startDate | date }}</td>
+                            <td>{{ offer.endDate | date }}</td>
+                            <td>
+                                <span class="badge bg-success" *ngIf="offer.isOffer">Active</span>
+                                <span class="badge bg-secondary" *ngIf="!offer.isOffer">Inactive</span>
+                            </td>
+                            <td>
+                                <button class="btn btn-outline-danger">
+                                    Change State
+                                </button>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
