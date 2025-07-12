@@ -31,8 +31,9 @@ export class CompanyProfileComponent {
   ) {}
 
   ngOnInit() {
-    this.companyService.getCompanyByToken().subscribe({
+    this.companyService.getCompanyById(this.id).subscribe({
       next: (data: Company) => {
+        
         this.company = data;
 
         this.documentService
@@ -44,7 +45,6 @@ export class CompanyProfileComponent {
         this.offerService.getOffersByCompanyId(this.company.id).subscribe({
           next: (offers: InternshipOfferSimple[]) => {
             this.offers = offers;
-            console.log('Offers fetched successfully:', this.offers);
           },
           error: (err) => {
             console.error('Error fetching offers:', err);

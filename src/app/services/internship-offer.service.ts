@@ -29,7 +29,10 @@ export class InternshipOfferService {
           area: offer.area,
           startDate: offer.startDate,
           endDate: offer.endDate,
-          vacancies: offer.vacancies
+          vacancies: offer.vacancies,
+          company: offer.company ?? null,
+          isOffer: offer.isOffer ?? false,
+          applications: offer.applications ?? []
         }))
       )
     );
