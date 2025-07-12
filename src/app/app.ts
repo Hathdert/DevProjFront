@@ -5,6 +5,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';           
 import { HttpClientModule } from '@angular/common/http'; 
 import { CommonModule } from '@angular/common';
+import { AuthService } from './auth'
 
 @Component({
   selector: 'app-root',
@@ -16,6 +17,9 @@ import { CommonModule } from '@angular/common';
 export class App {
   protected title = 'skillbridge-frontend';
   public navBarValue: string | null = null;
+
+    constructor(private auth: AuthService) {} 
+
 
   ngOnInit() {
     const token = localStorage.getItem('jwtToken');
@@ -39,5 +43,9 @@ export class App {
     } catch (e) {
       return null;
     }
+  }
+
+  logout() {
+    this.auth.logout();
   }
 }
