@@ -27,4 +27,15 @@ export class CompanyService {
     const url = this.apiUrlId.replace('{id}', id.toString());
     return this.http.get<Company>(url);
   }
+
+  editCompany(company: Company): Observable<Company> {
+    const token = localStorage.getItem('jwtToken');
+    if (!token) throw new Error('Token não encontrado no localStorage.');
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+
+    return this.http.put<Company>(this.apiUrlToken, company, { headers });
+  }
 }

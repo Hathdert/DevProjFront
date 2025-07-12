@@ -8,11 +8,18 @@ import { InternshipOfferSimple } from '../models/internship-offer.model';
 })
 export class InternshipOfferService {
   private apiUrl = 'http://localhost:8080/api/internshipoffers';
+  private apiUrlfindByCompant = 'http://localhost:8080/api/internshipoffers/companies/{companyId}';
+
+  private apiUrl2 = 'http://localhost:8080/api/internshipoffers/top6-by-applications';
 
   constructor(private http: HttpClient) {}
 
-  getAllSimpleOffers(): Observable<InternshipOfferSimple[]> {
-    return this.http.get<any[]>(this.apiUrl).pipe(
+  getAllOffers(): Observable<InternshipOfferSimple[]> {
+    return this.http.get<InternshipOfferSimple[]>(`${this.apiUrl}`);
+  }
+
+  getTop8Offers(): Observable<InternshipOfferSimple[]> {
+    return this.http.get<any[]>(this.apiUrl2).pipe(
       map(offers =>
         offers.map(offer => ({
           id: offer.id,
@@ -27,4 +34,9 @@ export class InternshipOfferService {
       )
     );
   }
+
+  getOffersByCompanyId(companyId: number): Observable<InternshipOfferSimple[]> {
+    return this.http.get<InternshipOfferSimple[]>(`${this.apiUrlfindByCompant}`.replace('{companyId}', companyId.toString()));
+  }
+
 }

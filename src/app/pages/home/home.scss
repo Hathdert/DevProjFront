@@ -11,8 +11,9 @@ body {
 /* Carousel */
 .carousel-item img {
   height: 850px;
-  object-fit: fill;
-  object-position: top;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 
 @media (max-width: 768px) {
@@ -34,37 +35,46 @@ body {
 
 /* Cards */
 .card {
-  border-radius: 0.5rem;
-  transition: transform 0.3s ease;
-  background-color: white;
+  border-radius: 0.75rem;
+  box-shadow: 0 0.5rem 1.5rem rgba(44,62,80,0.10);
+  transition: transform 0.3s, box-shadow 0.3s;
+  background: #fff;
+  border: none;
 }
 
 .card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15);
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 1rem 2rem rgba(44,62,80,0.15);
 }
 
-.custom-card {
-  transform: scale(0.9); 
-  transition: transform 0.3s ease;
-}
-
-.custom-card:hover {
-  transform: scale(0.95); 
-}
-
-/* Footer */
-footer {
-  font-size: 0.9rem;
-}
-
-footer h5, footer h6 {
+.card-title {
+  font-size: 1.25rem;
   font-weight: 700;
-  color: #F4D03F; 
+  color: #C0392B;
 }
 
-footer a:hover {
-  text-decoration: underline;
+.card-text {
+  font-size: 1rem;
+  color: #566573;
+}
+
+.btn {
+  background-color: #C0392B;
+  color: #fff;
+  border: none;
+}
+
+.btn:hover {
+  background-color: #A93226;
+  color: #fff;
+}
+
+.badge {
+  background-color: #2C3E50;
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
 }
 
 .card-wrapper::-webkit-scrollbar {
@@ -93,4 +103,20 @@ footer a:hover {
   &::-webkit-scrollbar {
     display: none; /* Chrome, Safari e Edge */
   }
+}
+
+/* Espaço extra entre título e cards */
+.container.mt-5 > .row {
+  margin-top: 2.5rem; // aumenta o espaço entre título e cards
+}
+
+/* Espaço extra entre os cards */
+.row.g-4, .row.g-5 {
+  row-gap: 2rem; // aumenta o espaço vertical entre cards
+  column-gap: 2rem; // aumenta o espaço horizontal entre cards
+}
+
+/* Opcional: mais espaço abaixo do título */
+h2.display-6 {
+  margin-bottom: 2.5rem;
 }
