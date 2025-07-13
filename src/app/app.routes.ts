@@ -6,11 +6,11 @@ import { Home } from './pages/home/home';
 import { RegisterComponent } from './pages/register/register';
 import { PrivateCompanyProfileComponent } from './pages/private-company-profile/private-company-profile';
 import { CompanyProfileComponent } from './pages/company-profile/company-profile';
-import { InternshipOffers } from './pages/internship-offers/internship-offers';
 import { Admin } from './pages/admin/admin';
 import { InternshipOffers } from './pages/internship-offers/internship-offers';
 import { AddInternshipOfferComponent } from './pages/add-internship-offer/add-internship-offer';
 import { OffertView } from './pages/offert-view/offert-view';
+import { CandidateProfile } from './pages/candidate-profile/candidate-profile';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
