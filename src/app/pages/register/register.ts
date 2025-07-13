@@ -92,8 +92,8 @@ export class RegisterComponent {
 
   onSubmitCompany() {
     if (this.companyForm.valid) {
-      const request = { ...this.companyForm.value, role: 'company' };
-      this.http.post<any>('http://localhost:8080/register', request).subscribe({
+      const request = { ...this.companyForm.value, role: 'company'  };
+      this.http.post<any>('http://localhost:8080/register', request, { responseType: 'text' as 'json' }).subscribe({
         next: () => {
           console.log('Company registered');
           if (this.profilePicFile) {
@@ -109,20 +109,31 @@ export class RegisterComponent {
     }
   }
 
-  onSubmitCandidate() {
-    if (this.candidateForm.valid) {
-      const request = { ...this.candidateForm.value, role: 'candidate' };
-      this.http.post('http://localhost:8080/register', request).subscribe({
-        next: () => {
-          console.log('Candidate registered');
-          this.router.navigate(['/login']);
+   onSubmitCandidate() {
+     if (this.candidateForm.valid) {
+       const request = { ...this.candidateForm.value, role: 'candidate' };
+       console.log(this.profilePicFile);
+       this.http.post('http://localhost:8080/register', request, { responseType: 'text' }).subscribe({
+         next: () => {
+           if (this.profilePicFile) {  
+             console.log(this.profilePicFile);
+            
+             this.uploadCandidateProfilePic(request.email);
+           }else {
+             this.router.navigate(['/login']);
+          }
+         },
+        error: (err) => {console.error('Registration error:', err);
+          console.log(this.profilePicFile);
+           this.uploadCandidateProfilePic(request.email);
         },
-        error: (err) => console.error('Registration error:', err),
       });
-    } else {
+     } else {
       console.error('Candidate form is invalid');
     }
   }
+
+
 
   onProfilePicSelected(event: Event, type: 'company' | 'candidate') {
     const input = event.target as HTMLInputElement;
@@ -141,6 +152,27 @@ export class RegisterComponent {
     formData.append('companyEmail', companyEmail);
     this.http
       .post('http://localhost:8080/api/documents/upload/company', formData)
+      .subscribe({
+        next: () => {
+          console.log('Profile picture uploaded');
+          this.router.navigate(['/login']);
+        },
+        error: (err) => {
+          console.error('Profile picture upload error:', err);
+          this.router.navigate(['/login']);
+        },
+      });
+  }
+
+  uploadCandidateProfilePic(candidateEmail: string) {
+    const formData = new FormData();
+    formData.append('file', this.profilePicFile!);
+    console.log('Uploading profile picture for candidate:', candidateEmail);
+    console.log('Profile picture file:', this.profilePicFile);
+    console.log('Form data:', formData);
+    formData.append('candidateEmail', candidateEmail);
+    this.http
+      .post('http://localhost:8080/api/documents/upload/candidate', formData)
       .subscribe({
         next: () => {
           console.log('Profile picture uploaded');
