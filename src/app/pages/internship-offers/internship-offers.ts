@@ -4,10 +4,12 @@ import { InternshipOfferService } from '../../services/internship-offer.service'
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+
 
 @Component({
   selector: 'app-internship-offers',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './internship-offers.html',
   styleUrl: './internship-offers.scss'
 })
@@ -36,10 +38,12 @@ export class InternshipOffers {
     let filtered = this.offers.filter(o =>
       !term || o.title.toLowerCase().includes(term)
     );
-    this.filteredOffers = this.showAll ? filtered : filtered.slice(0, 6);
+    this.filteredOffers = filtered;
   }
 
   onSearchTermChange(): void {
     this.updateFilteredOffers();
   }
+
+  
 }

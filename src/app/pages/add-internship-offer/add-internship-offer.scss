@@ -1,0 +1,93 @@
+body {
+  background-color: #BDC3C7;
+  color: #2C3E50;
+}
+
+.card {
+  border-radius: 1.5rem;
+  background: linear-gradient(135deg, #fff 70%, #e6eaf0 100%);
+  box-shadow:
+    0 1.5rem 3rem rgba(44,62,80,0.15),
+    0 0.5rem 1rem rgba(192,57,43,0.08),
+    0 0.25rem 0.5rem rgba(44,62,80,0.10) inset;
+  transition: transform 0.3s cubic-bezier(.03,.98,.52,.99), box-shadow 0.3s;
+  will-change: transform;
+  perspective: 800px;
+}
+
+.card:hover {
+  box-shadow:
+    0 2.5rem 4rem rgba(44,62,80,0.18),
+    0 1rem 2rem rgba(192,57,43,0.12),
+    0 0.5rem 1rem rgba(44,62,80,0.12) inset;
+  transform: translateY(-8px) scale(1.02) rotateX(2deg);
+}
+
+h2 {
+  color: #2C3E50;
+  font-weight: 700;
+  margin-bottom: 2.5rem;
+}
+
+.form-label {
+  color: #2C3E50;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.form-control, textarea {
+  border-radius: 0.75rem;
+  border: 1px solid #C0392B;
+  box-shadow: 0 0.25rem 0.5rem rgba(44,62,80,0.08);
+  font-size: 1rem;
+  background: linear-gradient(120deg, #fff 80%, #f7f9fa 100%);
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.form-control:focus, textarea:focus {
+  border-color: #A93226;
+  box-shadow: 0 0.5rem 1rem rgba(44,62,80,0.15);
+}
+
+.btn-primary {
+  background: linear-gradient(90deg, #C0392B 80%, #A93226 100%);
+  border: none;
+  font-weight: 700;
+  border-radius: 2rem;
+  box-shadow: 0 0.5rem 1rem rgba(44,62,80,0.10);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(90deg, #A93226 80%, #C0392B 100%);
+  box-shadow: 0 1rem 2rem rgba(44,62,80,0.15);
+}
+
+.form-check-input:checked {
+  background-color: #C0392B;
+  border-color: #C0392B;
+}
+
+.alert-success, .alert-danger {
+  border-radius: 0.75rem;
+  font-weight: 600;
+  box-shadow: 0 0.5rem 1rem rgba(44,62,80,0.10);
+}
+
+@keyframes slideOutUp {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  80% {
+    opacity: 1;
+    transform: translateY(-40px) scale(1.05);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-400px) scale(0.8);
+  }
+}
+
+.slide-out {
+  animation: slideOutUp 2.5s forwards;
+}

@@ -11,6 +11,6 @@ export interface InternshipOfferSimple {
   endDate: string;
   vacancies: number;
   company: Company;
-  isOffer: boolean;
+  offer: boolean;
   applications: Application[];
 }

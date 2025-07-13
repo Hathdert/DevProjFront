@@ -12,7 +12,7 @@
                     <ng-template #initialBlock>
                         <div class="rounded-circle bg-primary text-white d-inline-flex align-items-center justify-content-center"
                             style="width: 100%; max-width: 275px; height: 275px; font-size: 4rem;">
-                            {{ company?.name?.[0] }}
+                            {{ company.name[0] }}
                         </div>
                     </ng-template>
                 </div>
@@ -78,8 +78,8 @@
                                     <strong>End Date:</strong> {{ offer.endDate | date }}
                                 </p>
                                 <td>
-                                    <span class="badge bg-success" *ngIf="offer.isOffer">Active</span>
-                                    <span class="badge bg-secondary" *ngIf="!offer.isOffer">Inactive</span>
+                                    <span class="badge bg-success" *ngIf="offer.offer">Active</span>
+                                    <span class="badge bg-secondary" *ngIf="!offer.offer">Inactive</span>
                             </div>
                             <div class="text-center" style="margin-bottom: 5%;">
                                 <a href="#" class="btn text-light" style="background-color: #C0392B;">View Offer</a>
