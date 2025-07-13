@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +8,8 @@ import { Observable, tap } from 'rxjs';
 
 //Autentica o usuário, cria o Token e salva o Token no localStorage (Like a cookie)
 export class AuthService {
+  tokenSubject = new BehaviorSubject<string | null>(localStorage.getItem('jwtToken'));
+  token$ = this.tokenSubject.asObservable();
 
   //Url da API
   private baseUrl = 'http://localhost:8080/auth';
@@ -21,7 +23,7 @@ export class AuthService {
     return this.http.post<{ token: string }>(`${this.baseUrl}/login`, { username, password }).pipe(
       tap(response => {
         localStorage.setItem('jwtToken', response.token);
-        window.location.reload();
+        this.tokenSubject.next(response.token);
       })
     );
   }
@@ -34,5 +36,6 @@ export class AuthService {
   // Apaga o Token que está no localStorage
   logout() {
     localStorage.removeItem('jwtToken');
+    this.tokenSubject.next(null);
   }
 }

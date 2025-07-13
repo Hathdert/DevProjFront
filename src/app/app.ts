@@ -1,7 +1,7 @@
 // src/app/app.ts
 
 import { Component } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';           
 import { HttpClientModule } from '@angular/common/http'; 
 import { CommonModule } from '@angular/common';
@@ -18,15 +18,19 @@ export class App {
   protected title = 'skillbridge-frontend';
   public navBarValue: string | null = null;
 
-    constructor(private auth: AuthService) {} 
+    constructor(private auth: AuthService, private router: Router) {} 
 
 
-  ngOnInit() {
-    const token = localStorage.getItem('jwtToken');
+ngOnInit() {
+  this.auth.token$.subscribe(token => {
     if (token) {
-      this.navBarValue = this.getNavBarFromToken(token);
-    }
+    const nav = this.getNavBarFromToken(token);
+    this.navBarValue = nav;
+  } else {
+    this.navBarValue = null;
   }
+  });
+}
 
   getNavBarFromToken(token: string): string | null {
     try {
@@ -47,5 +51,6 @@ export class App {
 
   logout() {
     this.auth.logout();
+    this.router.navigate(['/login']);
   }
 }
