@@ -125,7 +125,7 @@ export class RegisterComponent {
          },
         error: (err) => {console.error('Registration error:', err);
           console.log(this.profilePicFile);
-           this.uploadCandidateProfilePic(request.email);
+           
         },
       });
      } else {

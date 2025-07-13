@@ -1,56 +1,124 @@
 <div class="container mt-5" *ngIf="candidate">
-    <h2 class="text-center mb-4 text-danger">Candidate Profile</h2>
+  <h2 class="text-center mb-4 text-danger">Candidate Profile</h2>
 
-    <div class="card shadow p-4">
-        <div class="row align-items-center">
-            <div class="col-md-4 text-center mb-4 mb-md-0">
-                <div class="col-md-4 text-center mb-4 mb-md-0">
-                    <ng-container *ngIf="candidateImageUrl; else initialBlock">
-                        <img [src]="candidateImageUrl" alt="Company Photo" class="rounded-circle shadow"
-                            style="width: 275px; height: 275px; object-fit: cover;" />
-                    </ng-container>
-                    <ng-template #initialBlock>
-                        <div class="rounded-circle bg-primary text-white d-inline-flex align-items-center justify-content-center"
-                            style="width: 275px; height: 275px; font-size: 4rem; margin-left: 25%;">
-                            {{ candidate?.name?.[0] }}
-                        </div>
-                    </ng-template>
-                </div>
+  <div class="card shadow p-4">
+    <div class="row align-items-center">
+      <div class="col-12 col-md-4 text-center mb-4 mb-md-0">
+        <ng-container *ngIf="candidateImageUrl; else initialBlock">
+          <img
+            [src]="candidateImageUrl"
+            alt="Candidate Photo"
+            class="rounded-circle shadow"
+            style="
+              width: 100%;
+              max-width: 275px;
+              height: 275px;
+              object-fit: cover;
+            "
+          />
+        </ng-container>
+        <ng-template #initialBlock>
+          <div
+            class="rounded-circle bg-primary text-white d-inline-flex align-items-center justify-content-center"
+            style="
+              width: 100%;
+              max-width: 275px;
+              height: 275px;
+              font-size: 4rem;
+            "
+          >
+            {{ candidate?.name?.[0] }}
+          </div>
+        </ng-template>
+      </div>
+      <div class="col-12 col-md-8">
+        <div class="row" id="container-candidate">
+          <div class="col-md-6 mb-3">
+            <strong>Name:</strong>
+            <div *ngIf="!isEditing">{{ candidate.name }}</div>
+            <input
+              *ngIf="isEditing"
+              [(ngModel)]="editCandidateData.name"
+              class="form-control"
+            />
+          </div>
+          <div class="col-md-6 mb-3">
+            <strong>Email:</strong>
+            <div *ngIf="!isEditing">{{ candidate.email }}</div>
+            <input
+              *ngIf="isEditing"
+              [(ngModel)]="editCandidateData.email"
+              class="form-control"
+            />
+          </div>
+          <div class="col-md-6 mb-3">
+            <strong>Phone:</strong>
+            <div *ngIf="!isEditing">{{ candidate.phone }}</div>
+            <input
+              *ngIf="isEditing"
+              [(ngModel)]="editCandidateData.phone"
+              class="form-control"
+            />
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <strong>Birth Date:</strong>
+            <div *ngIf="!isEditing">
+              {{ candidate.birthDate | date : "dd/MM/yyyy" }}
             </div>
-            <div class="col-md-8">
-                <div class="row" id="container-cadidate" >
-                    <div class="col-md-6 mb-3">
-                        <strong>Name:</strong>
-                        <div>{{ candidate.name }}</div>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <strong>Email:</strong>
-                        <div>{{ candidate.email }}</div>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <strong>Phone:</strong>
-                        <div>{{ candidate.phone }}</div>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <strong>Birth Date:</strong>
-                        <div>{{ candidate.birthDate | date: 'dd/MM/yyyy' }}</div>
-                    <div class="col-md-6 mb-3">
-                        <strong>Address:</strong>
-                        <div>{{ candidate.address }}</div>
-                    </div>
-                    
-                </div>
-            </div>
+            <input
+              *ngIf="isEditing"
+              [(ngModel)]="editCandidateData.birthDate"
+              class="form-control"
+              type="date"
+            />
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <strong>Address:</strong>
+            <div *ngIf="!isEditing">{{ candidate.address }}</div>
+            <textarea
+              *ngIf="isEditing"
+              [(ngModel)]="editCandidateData.address"
+              class="form-control"
+            ></textarea>
+          </div>
+          <div class="col-md-6 mb-3">
+            <strong>Photo</strong>
+
+          <div class="text-end">
+            <button
+              *ngIf="!isEditing"
+              class="btn btn-outline-danger"
+              (click)="startEdit()"
+            >
+              Edit Profile
+            </button>
+            <button
+              *ngIf="isEditing"
+              class="btn btn-danger me-2"
+              (click)="saveEdit()"
+            >
+              Save
+            </button>
+            <button
+              *ngIf="isEditing"
+              class="btn btn-secondary"
+              (click)="cancelEdit()"
+            >
+              Cancel
+            </button>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 
-    <!-- Documents Section -->
-    <div class="mt-4">
+  <!-- Documents Section -->
+  <!-- <div class="mt-4">
         <h5 class="text-danger">Documents</h5>
-        <!--List all company documents here if needed-->
-        <!--
         <div class="row">
-            <div class="col-md-3 mb-3" *ngFor="let doc of company.documents">
+            <div class="col-md-3 mb-3" *ngFor="let doc of candidate.documents">
                 <ng-container *ngIf="doc.filePath.endsWith('.pdf'); else imageBlock">
                     <a [href]="doc.filePath" target="_blank" class="btn btn-outline-danger w-100">
                         <i class="bi bi-file-earmark-pdf"></i> View PDF
@@ -61,6 +129,5 @@
                 </ng-template>
             </div>
         </div>
-        -->
-    </div>
+    </div> -->
 </div>

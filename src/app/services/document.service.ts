@@ -21,4 +21,5 @@ getCandidateFirstImage(candidateId: number): Observable<Blob> {
   const url = this.apiUrlCandidateFirstImage.replace('{candidateId}', candidateId.toString());
   return this.http.get(url, { responseType: 'blob' });
 }
+
 }

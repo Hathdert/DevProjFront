@@ -1,21 +1,22 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CandidateService } from '../../services/candidate.service';
-import { CommonModule } from '@angular/common';
 import { DocumentService } from '../../services/document.service';
+import { CommonModule } from '@angular/common';
 import { Candidate } from '../../models/candidate.model';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-candidate-profile',
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './candidate-profile.html',
-  styleUrl: './candidate-profile.scss'
+  styleUrl: './candidate-profile.scss',
 })
 export class CandidateProfile {
   candidate: Candidate | null = null;
   candidateImageUrl: string | null = null;
   isEditing = false;
-   editCandidateData: Candidate = {} as Candidate;
+  editCandidateData: Candidate = {} as Candidate;
 
   constructor(
     private router: Router,
@@ -36,6 +37,36 @@ export class CandidateProfile {
       },
       error: (err) => {
         console.error('Erro ao buscar perfil do candidato:', err);
+      },
+    });
+  }
+
+  
+  
+  startEdit() {
+    this.isEditing = true;
+    this.editCandidateData = { 
+      ...(this.candidate as Candidate),
+      name: this.candidate?.name ?? '',
+      email: this.candidate?.email ?? '',
+      address: this.candidate?.address ?? '',
+      phone: this.candidate?.phone ?? '',
+      birthDate: this.candidate?.birthDate ?? '',
+     };
+  }
+  cancelEdit() {
+    this.isEditing = false;
+    this.editCandidateData = {} as Candidate;
+  }
+  saveEdit() {
+    this.candidateService.updateCandidate(this.editCandidateData).subscribe({
+      next: (updatedCandidate: Candidate) => {
+        this.candidate = updatedCandidate;
+        this.isEditing = false;
+        console.log('Perfil do candidato atualizado com sucesso');
+      },
+      error: (err) => {
+        console.error('Erro ao atualizar perfil do candidato:', err);
       },
     });
   }
