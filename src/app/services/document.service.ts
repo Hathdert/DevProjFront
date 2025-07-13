@@ -12,14 +12,14 @@ export class DocumentService {
 
   constructor(private http: HttpClient) {}
 
-getCompanyFirstImage(companyId: number): Observable<Blob> {
-  const url = this.apiUrlCompanyFirstImage.replace('{companyId}', companyId.toString());
-  return this.http.get(url, { responseType: 'blob' });
-}
+  getCompanyFirstImage(companyId: number): Observable<Blob> {
+    const url = this.apiUrlCompanyFirstImage.replace('{companyId}', companyId.toString());
+    return this.http.get(url, { responseType: 'blob' });
+  }
 
-getCandidateFirstImage(candidateId: number): Observable<Blob> {
-  const url = this.apiUrlCandidateFirstImage.replace('{candidateId}', candidateId.toString());
-  return this.http.get(url, { responseType: 'blob' });
-}
+  getCandidateFirstImage(candidateId: number): Observable<Blob> {
+    const url = this.apiUrlCandidateFirstImage.replace('{candidateId}', candidateId.toString());
+    return this.http.get(url, { responseType: 'blob' });
+  }
 
 }

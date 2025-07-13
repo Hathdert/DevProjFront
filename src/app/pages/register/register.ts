@@ -57,6 +57,7 @@ export class RegisterComponent {
     uploadDate: '',
     company: this.company,
     candidate: this.candidate,
+    application: null as any,
   };
 
   constructor(private router: Router, private http: HttpClient) {}
