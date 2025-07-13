@@ -55,4 +55,8 @@ export class InternshipOfferService {
 getCompanyByOfferId(offerId: number): Observable<CompanyOffer> {
   return this.http.get<CompanyOffer>(`http://localhost:8080/api/companies/by-offer/${offerId}`);
 }
+
+createApplication(application: any): Observable<any> {
+  return this.http.post('http://localhost:8080/api/applications/new', application);
+}
 }
