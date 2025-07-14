@@ -97,3 +97,22 @@ body {
 .text-center.mt-3 {
   margin-top: 2rem;
 }
+
+@keyframes slideOutUp {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  80% {
+    opacity: 1;
+    transform: translateY(-40px) scale(1.05);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-400px) scale(0.8);
+  }
+}
+
+.slide-out {
+  animation: slideOutUp 1.5s forwards;
+}

@@ -21,19 +21,22 @@ export class LoginComponent {
   username = '';
   password = '';
   errorMessage = '';
+  success = false;
 
   constructor(private auth: AuthService, private router: Router) {}
 
   onSubmit() {
     this.auth.login(this.username, this.password).subscribe({
       next: () => {
-        
         this.errorMessage = '';
-        this.router.navigate(['/home']);
+        this.success = true;
+        setTimeout(() => {
+          this.router.navigate(['/home']);
+        }, 1500); // tempo igual ao da animação (2.5s)
       },
       error: () => {
         this.errorMessage = 'Usuário ou senha inválidos.';
-        alert(this.errorMessage); // ou mostrar em uma div com ngIf
+        alert(this.errorMessage);
       }
     });
   }
