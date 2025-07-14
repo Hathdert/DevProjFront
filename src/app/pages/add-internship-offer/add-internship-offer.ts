@@ -22,7 +22,7 @@ export class AddInternshipOfferComponent {
     endDate: '',
     vacancies: 1,
     company: { id: 1 },
-    isOffer: true
+    offer: true
   };
   success = false;
   error = '';
