@@ -9,5 +9,5 @@ export interface InternshipOfferCreate {
   company: {
     id: number;
   };
-  isOffer: boolean;
+  offer: boolean;
 }
