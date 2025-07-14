@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CompanyService } from '../../services/company.service';
 import { Company } from '../../models/company.model';
 import { CommonModule } from '@angular/common';
@@ -11,7 +11,7 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-company-profile',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './private-company-profile.html',
   styleUrls: ['./private-company-profile.scss'],
 })
@@ -66,10 +66,6 @@ export class PrivateCompanyProfileComponent {
     return this.offers;
   }
 
-  goToOffer(offerId: number) {
-    this.router.navigate(['/offer', offerId]);
-  }
-
   startEdit() {
     this.isEditing = true;
     this.editCompanyData = {
@@ -96,5 +92,18 @@ export class PrivateCompanyProfileComponent {
       },
       error: () => alert('Failed to update company'),
     });
+  }
+
+  changeOfferStatus(offerId: number, status: boolean) {
+    this.offerService.changeOfferStatus(offerId, status).subscribe({
+      next: (updatedOffer: InternshipOfferSimple) => {
+        const index = this.offers.findIndex((o) => o.id === updatedOffer.id);
+        if (index !== -1) {
+          this.offers[index] = updatedOffer;
+        }
+      },
+      error: () => alert('Failed to change offer status'),
+    });
+    
   }
 }

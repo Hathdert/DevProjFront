@@ -14,6 +14,8 @@ export class InternshipOfferService {
 
   private apiUrl2 = 'http://localhost:8080/api/internshipoffers/top6-by-applications';
 
+  private apiUrlChangeStatus = 'http://localhost:8080/api/internshipoffers/offer/{offerId}/change-status';
+
   constructor(private http: HttpClient) {}
 
   getAllOffers(): Observable<InternshipOfferSimple[]> {
@@ -55,6 +57,12 @@ export class InternshipOfferService {
 getCompanyByOfferId(offerId: number): Observable<CompanyOffer> {
   return this.http.get<CompanyOffer>(`http://localhost:8080/api/companies/by-offer/${offerId}`);
 }
+
+changeOfferStatus(offerId: number, status: boolean): Observable<InternshipOfferSimple> {
+  return this.http.patch<InternshipOfferSimple>(
+    this.apiUrlChangeStatus.replace('{offerId}', offerId.toString()),
+    status
+  );
 
 createApplication(application: any): Observable<any> {
   return this.http.post('http://localhost:8080/api/applications/new', application);

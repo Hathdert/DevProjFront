@@ -92,7 +92,7 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let offer of filteredOffers | slice:0:8" style="cursor:pointer"
-                            (click)="goToOffer(offer.id)">
+                            [routerLink]="['/offers', offer.id]">
                             <td>{{ offer.title }}</td>
                             <td>{{ offer.description }}</td>
                             <td>{{ offer.startDate | date }}</td>
@@ -102,7 +102,7 @@
                                 <span class="badge bg-secondary" *ngIf="!offer.offer">Inactive</span>
                             </td>
                             <td>
-                                <button class="btn btn-outline-danger">
+                                <button (click)="changeOfferStatus(offer.id, !offer.offer); $event.stopPropagation()" class="btn btn-outline-danger">
                                     Change State
                                 </button>
                         </tr>
