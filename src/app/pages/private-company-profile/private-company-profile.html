@@ -92,7 +92,7 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let offer of filteredOffers | slice:0:8" style="cursor:pointer"
-                            [routerLink]="['/offers', offer.id]">
+                            [routerLink]="['/company-offer', offer.id]">
                             <td>{{ offer.title }}</td>
                             <td>{{ offer.description }}</td>
                             <td>{{ offer.startDate | date }}</td>

@@ -18,6 +18,7 @@ import { HttpClient } from '@angular/common/http';
 export class RegisterComponent {
   selectedType: 'candidate' | 'company' = 'candidate';
   profilePicFile: File | null = null;
+  success = false;
 
   company: Company = {
     id: 0,
@@ -97,10 +98,13 @@ export class RegisterComponent {
       this.http.post<any>('http://localhost:8080/register', request, { responseType: 'text' as 'json' }).subscribe({
         next: () => {
           console.log('Company registered');
+          this.success = true;
           if (this.profilePicFile) {
             this.uploadCompanyProfilePic(request.email);
           } else {
-            this.router.navigate(['/login']);
+            setTimeout(() => {
+              this.router.navigate(['/login']);
+            }, 2500); // tempo igual ao da animação
           }
         },
         error: (err) => console.error('Registration error:', err),
@@ -113,28 +117,25 @@ export class RegisterComponent {
    onSubmitCandidate() {
      if (this.candidateForm.valid) {
        const request = { ...this.candidateForm.value, role: 'candidate' };
-       console.log(this.profilePicFile);
        this.http.post('http://localhost:8080/register', request, { responseType: 'text' }).subscribe({
          next: () => {
+           this.success = true;
            if (this.profilePicFile) {  
-             console.log(this.profilePicFile);
-            
              this.uploadCandidateProfilePic(request.email);
-           }else {
-             this.router.navigate(['/login']);
-          }
+           } else {
+             setTimeout(() => {
+               this.router.navigate(['/login']);
+             }, 2500);
+           }
          },
-        error: (err) => {console.error('Registration error:', err);
-          console.log(this.profilePicFile);
-           
+        error: (err) => {
+          console.error('Registration error:', err);
         },
       });
      } else {
       console.error('Candidate form is invalid');
     }
   }
-
-
 
   onProfilePicSelected(event: Event, type: 'company' | 'candidate') {
     const input = event.target as HTMLInputElement;
@@ -147,20 +148,19 @@ export class RegisterComponent {
   uploadCompanyProfilePic(companyEmail: string) {
     const formData = new FormData();
     formData.append('file', this.profilePicFile!);
-    console.log('Uploading profile picture for company:', companyEmail);
-    console.log('Profile picture file:', this.profilePicFile);
-    console.log('Form data:', formData);
     formData.append('companyEmail', companyEmail);
     this.http
       .post('http://localhost:8080/api/documents/upload/company', formData)
       .subscribe({
         next: () => {
-          console.log('Profile picture uploaded');
-          this.router.navigate(['/login']);
+          setTimeout(() => {
+            this.router.navigate(['/login']);
+          }, 2500);
         },
         error: (err) => {
-          console.error('Profile picture upload error:', err);
-          this.router.navigate(['/login']);
+          setTimeout(() => {
+            this.router.navigate(['/login']);
+          }, 2500);
         },
       });
   }
@@ -168,20 +168,19 @@ export class RegisterComponent {
   uploadCandidateProfilePic(candidateEmail: string) {
     const formData = new FormData();
     formData.append('file', this.profilePicFile!);
-    console.log('Uploading profile picture for candidate:', candidateEmail);
-    console.log('Profile picture file:', this.profilePicFile);
-    console.log('Form data:', formData);
     formData.append('candidateEmail', candidateEmail);
     this.http
       .post('http://localhost:8080/api/documents/upload/candidate', formData)
       .subscribe({
         next: () => {
-          console.log('Profile picture uploaded');
-          this.router.navigate(['/login']);
+          setTimeout(() => {
+            this.router.navigate(['/login']);
+          }, 2500);
         },
         error: (err) => {
-          console.error('Profile picture upload error:', err);
-          this.router.navigate(['/login']);
+          setTimeout(() => {
+            this.router.navigate(['/login']);
+          }, 2500);
         },
       });
   }

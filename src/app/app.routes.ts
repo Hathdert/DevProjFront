@@ -11,6 +11,8 @@ import { InternshipOffers } from './pages/internship-offers/internship-offers';
 import { AddInternshipOfferComponent } from './pages/add-internship-offer/add-internship-offer';
 import { OffertView } from './pages/offert-view/offert-view';
 import { CandidateProfile } from './pages/candidate-profile/candidate-profile';
+import { OfferViewCompany } from './pages/offer-view-company/offer-view-company';
+import { ViewApplication } from './pages/view-application/view-application';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -24,5 +26,7 @@ export const routes: Routes = [
   { path: 'offers', component: InternshipOffers },
   { path: 'addoffers', component: AddInternshipOfferComponent },
   { path: 'offers/:id', component: OffertView },
+  { path: 'company-offer/:id', component: OfferViewCompany },
+  { path: 'view-application/:id', component: ViewApplication },
   { path: '**', redirectTo: 'login' },
 ];

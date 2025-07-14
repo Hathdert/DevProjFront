@@ -9,16 +9,18 @@ import { ApplicationCreate } from "../models/application-create.model";
 })
 export class ApplicationService {
   private apiUrl = 'http://localhost:8080/api/applications';
+  private apiUrlUpdateState = 'http://localhost:8080/api/applications/{applicationId}/change-state';
 
-  constructor(private http: HttpClient) {}
+
+  constructor(private http: HttpClient) { }
 
   createApplication(application: ApplicationCreate): Observable<any> {
     return this.http.post(`${this.apiUrl}/new`, application);
   }
 
-    getOfferById(id: number): Observable<Application> {
-        return this.http.get<Application>(`${this.apiUrl}/internshipoffer/${id}`);
-    }
+  getOfferById(id: number): Observable<Application> {
+    return this.http.get<Application>(`${this.apiUrl}/internshipoffer/${id}`);
+  }
 
   getApplicationsByOfferId(offerId: number): Observable<Application[]> {
     return this.http.get<Application[]>(`${this.apiUrl}/internshipoffer/${offerId}`);
@@ -26,5 +28,12 @@ export class ApplicationService {
 
   getApplicationsByCandidateId(candidateId: number): Observable<Application[]> {
     return this.http.get<Application[]>(`${this.apiUrl}/candidate/${candidateId}`);
+  }
+
+  changeOfferStatus(applicationId: number, status: number): Observable<Application> {
+    return this.http.patch<Application>(
+      this.apiUrlUpdateState.replace('{applicationId}', applicationId.toString()),
+      status
+    );
   }
 }

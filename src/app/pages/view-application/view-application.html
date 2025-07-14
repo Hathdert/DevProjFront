@@ -1,0 +1,59 @@
+<div class="container mt-5 mb-5" *ngIf="application">
+  <div class="row justify-content-center">
+    <div class="col-lg-10">
+      <div class="offer-card p-0">
+        <!-- Top Bar -->
+        <div class="d-flex flex-column align-items-center px-5 pt-5 pb-3 offer-topbar"
+          style="background: url('assets/images/back2.png') center center/cover no-repeat; border-radius: 2rem 2rem 0 0; min-height: 220px; width: 100%;">
+          <button class="btn btn-outline-secondary btn-lg rounded-pill fw-bold align-self-start mb-4"
+            (click)="goBack()">
+            ← Back
+          </button>
+          <h2 class="fw-bold mb-3 text-center" style="color: #2C3E50; font-size: 2.4rem;">
+            Application #{{ application.id }}
+          </h2>
+          <div class="mb-2 fw-semibold" style="color: #C0392B; font-size: 1.3rem;">
+            {{ application.candidate.name }}
+          </div>
+          <div class="mb-4 text-muted" style="font-size: 1.05rem;">
+            {{ application.candidate.email }}
+          </div>
+          <button (click)="changeApplicationStatus(application.id, 1)" class="btn btn-success btn-sm">
+            Accept
+          </button>
+          <button (click)="changeApplicationStatus(application.id, 2)" class="btn btn-danger btn-sm">
+            Reject
+          </button>
+
+        </div>
+        <div class="row g-5 px-5 pb-5 align-items-stretch">
+          <!-- Left Panel: Pitch & State -->
+          <div class="col-md-7 d-flex">
+            <div class="offer-panel flex-grow-1 d-flex flex-column justify-content-center">
+              <h4 class="fw-bold mb-3" style="color: #C0392B;">Pitch</h4>
+              <p class="mb-4 fs-5 text-muted">{{ application.pitch }}</p>
+              <h5 class="fw-bold mb-2" style="color: #2C3E50;">State</h5>
+              <p *ngIf="application.state === 0" class="badge bg-warning text-dark">Pending</p>
+              <p *ngIf="application.state === 1" class="badge bg-success">Accepted</p>
+              <p *ngIf="application.state === 2" class="badge bg-danger">Rejected</p>
+            </div>
+          </div>
+          <!-- Right Panel: Candidate Info -->
+          <div class="col-md-5 d-flex">
+            <div class="offer-panel flex-grow-1 d-flex flex-column justify-content-center">
+              <h5 class="fw-bold mb-3" style="color: #2C3E50;">Candidate Details</h5>
+              <div class="mb-2"><strong>Address: </strong> <span class="text-muted">{{ application.candidate.address
+                  }}</span></div>
+              <div class="mb-2"><strong>Phone: </strong> <span class="text-muted">{{ application.candidate.phone
+                  }}</span></div>
+              <div class="mb-2"><strong>Birth Date: </strong> <span class="text-muted">{{
+                  application.candidate.birthDate }}</span></div>
+              <div class="mb-2"><strong>Registration Date: </strong> <span class="text-muted">{{
+                  application.candidate.registrationDate }}</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

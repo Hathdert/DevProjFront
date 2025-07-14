@@ -1,0 +1,24 @@
+body {
+  background-color: #BDC3C7;
+  color: #2C3E50;
+}
+
+.offer-card {
+  border-radius: 2rem;
+  background: linear-gradient(135deg, #fff 70%, #e6eaf0 100%);
+  box-shadow: 0 1.5rem 3rem rgba(44,62,80,0.15);
+  min-height: 700px;
+}
+
+.offer-topbar {
+  background: transparent;
+  border-bottom: 1px solid #e6eaf0;
+}
+
+.offer-panel {
+  background: #f7f9fa;
+  border-radius: 1.2rem;
+  box-shadow: 0 0.5rem 1rem rgba(44,62,80,0.08);
+  padding: 2.5rem 2rem;
+  min-height: 350px;
+}
