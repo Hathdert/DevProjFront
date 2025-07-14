@@ -14,8 +14,7 @@ import { CommonModule } from '@angular/common';
     CommonModule
   ],
   templateUrl: './login.html',
-  styleUrls: ['./login.scss'],
-  providers: [AuthService]  
+  styleUrls: ['./login.scss']
 })
 
 export class LoginComponent {
@@ -30,7 +29,6 @@ export class LoginComponent {
       next: () => {
         
         this.errorMessage = '';
-        alert('Login realizado com sucesso!');
         this.router.navigate(['/home']);
       },
       error: () => {
