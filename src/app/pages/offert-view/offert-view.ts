@@ -107,8 +107,10 @@ export class OffertView {
   
 
   submitApplication() {
+    console.log('Submitting application:', this.application);
     this.applicationService.createApplication(this.application).subscribe({
       next: (createdApp) => {
+        console.log("Application createdApp: ", createdApp);
         const appId = createdApp.id;
         console.log('Application created:', createdApp);
   
@@ -122,6 +124,7 @@ export class OffertView {
           this.showBack = false;
           this.success = false;
         }, 2000);
+        
       },
       error: () => {
         this.error = 'Error creating application!';
