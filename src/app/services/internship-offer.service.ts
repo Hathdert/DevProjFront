@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 import { InternshipOfferSimple } from '../models/internship-offer.model';
 import { InternshipOfferCreate } from '../models/internship-offer-create.model';
@@ -53,6 +53,15 @@ export class InternshipOfferService {
   getOfferById(id: number): Observable<InternshipOfferSimple> {
   return this.http.get<InternshipOfferSimple>(`http://localhost:8080/api/internshipoffers/${id}`);
 }
+  getOfferByIdToken(id: number): Observable<InternshipOfferSimple> {
+    const token = localStorage.getItem('jwtToken');
+    if (!token) throw new Error('Token não encontrado no localStorage.');
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+    return this.http.get<InternshipOfferSimple>(`http://localhost:8080/api/internshipoffers/token/${id}`, { headers });
+}
 
 getCompanyByOfferId(offerId: number): Observable<CompanyOffer> {
   return this.http.get<CompanyOffer>(`http://localhost:8080/api/companies/by-offer/${offerId}`);
@@ -63,6 +72,7 @@ changeOfferStatus(offerId: number, status: boolean): Observable<InternshipOfferS
     this.apiUrlChangeStatus.replace('{offerId}', offerId.toString()),
     status
   );
+}
 
 createApplication(application: any): Observable<any> {
   return this.http.post('http://localhost:8080/api/applications/new', application);
