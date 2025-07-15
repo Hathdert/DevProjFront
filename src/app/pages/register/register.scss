@@ -97,3 +97,15 @@ body {
 .text-center.mt-3 {
   margin-top: 2rem;
 }
+small{
+  margin-left: 2%;;
+  font-size: 0.875em;
+}
+.text-danger {
+  color: #E74C3C;
+} 
+quill-editor {
+  width: 100%;          
+  max-width: 100%;     
+  box-sizing: border-box; 
+}
