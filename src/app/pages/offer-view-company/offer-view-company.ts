@@ -7,7 +7,6 @@ import { CommonModule } from '@angular/common';
 import { Location } from '@angular/common';
 import { CompanyOffer } from '../../models/company-offer.model';
 import { FormsModule } from '@angular/forms';
-import { App } from '../../app';
 import { ApplicationCreate } from '../../models/application-create.model';
 import { CandidateService } from '../../services/candidate.service';
 import { Document } from '../../models/document.model';
@@ -50,6 +49,7 @@ export class OfferViewCompany {
     state: 0,
     internshipOffer: { id: 0 }
   };
+
   document: Document = {
     fileName: '', 
     fileType: '',
@@ -61,8 +61,6 @@ export class OfferViewCompany {
   };
 
   applications: any[] = [];
-
-  
 
   constructor(
     private route: ActivatedRoute,
@@ -81,15 +79,22 @@ ngOnInit(): void {
       this.offer = data;
       this.applications = this.offer.applications || [];
 
-      
+      // Para cada application, busca os detalhes do candidato usando candidateId
+      this.applications.forEach((app, idx) => {
+        if (app.candidateId) {
+          this.candidateService.getCandidateById(app.candidateId).subscribe({
+            next: (candidate) => {
+              this.applications[idx].candidate = candidate;
+            },
+            error: (err) => console.error('Erro ao buscar candidato:', err)
+          });
+        }
+      });
     },
     error: (err) => console.error('Erro ao buscar oferta:', err)
   });
 }
-
-
   goBack() {
     this.location.back();
   }
-
 }

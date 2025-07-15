@@ -53,14 +53,20 @@ export class InternshipOfferService {
   getOfferById(id: number): Observable<InternshipOfferSimple> {
   return this.http.get<InternshipOfferSimple>(`http://localhost:8080/api/internshipoffers/${id}`);
 }
-  getOfferByIdToken(id: number): Observable<InternshipOfferSimple> {
-    const token = localStorage.getItem('jwtToken');
-    if (!token) throw new Error('Token não encontrado no localStorage.');
+getOfferByIdToken(id: number): Observable<InternshipOfferSimple> {
+  const token = localStorage.getItem('jwtToken');
+  if (!token) throw new Error('Token não encontrado no localStorage.');
 
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`
-    });
-    return this.http.get<InternshipOfferSimple>(`http://localhost:8080/api/internshipoffers/token/${id}`, { headers });
+  const headers = new HttpHeaders({
+    Authorization: `Bearer ${token}`
+  });
+
+  return this.http.get<{ offer: InternshipOfferSimple }>(
+    `http://localhost:8080/api/internshipoffers/token/${id}`,
+    { headers }
+  ).pipe(
+    map(response => response.offer)
+  );
 }
 
 getCompanyByOfferId(offerId: number): Observable<CompanyOffer> {
@@ -76,4 +82,6 @@ changeOfferStatus(offerId: number, status: boolean): Observable<InternshipOfferS
 
 createApplication(application: any): Observable<any> {
   return this.http.post('http://localhost:8080/api/applications/new', application);
+
+}
 }
