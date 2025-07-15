@@ -69,16 +69,16 @@ getOfferByIdToken(id: number): Observable<InternshipOfferSimple> {
   );
 }
 
-getCompanyByOfferId(offerId: number): Observable<CompanyOffer> {
-  return this.http.get<CompanyOffer>(`http://localhost:8080/api/companies/by-offer/${offerId}`);
-}
+  getCompanyByOfferId(offerId: number): Observable<CompanyOffer> {
+    return this.http.get<CompanyOffer>(`http://localhost:8080/api/companies/by-offer/${offerId}`);
+  }
 
-changeOfferStatus(offerId: number, status: boolean): Observable<InternshipOfferSimple> {
-  return this.http.patch<InternshipOfferSimple>(
-    this.apiUrlChangeStatus.replace('{offerId}', offerId.toString()),
-    status
-  );
-}
+  changeOfferStatus(offerId: number, status: boolean): Observable<InternshipOfferSimple> {
+    return this.http.patch<InternshipOfferSimple>(
+      this.apiUrlChangeStatus.replace('{offerId}', offerId.toString()),
+      status
+    );
+  }
 
 createApplication(application: any): Observable<any> {
   return this.http.post('http://localhost:8080/api/applications/new', application);
