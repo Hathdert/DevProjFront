@@ -77,3 +77,4 @@ changeOfferStatus(offerId: number, status: boolean): Observable<InternshipOfferS
 createApplication(application: any): Observable<any> {
   return this.http.post('http://localhost:8080/api/applications/new', application);
 }
+}
