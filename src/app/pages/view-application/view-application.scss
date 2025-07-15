@@ -16,11 +16,14 @@ body {
 }
 
 .offer-panel {
+  min-height: 350px;
+  max-height: 350px; // altura fixa
+  overflow-y: auto;  // scroll se passar do limite
+  word-break: break-word; // quebra de linha automática
   background: #f7f9fa;
   border-radius: 1.2rem;
   box-shadow: 0 0.5rem 1rem rgba(44,62,80,0.08);
   padding: 2.5rem 2rem;
-  min-height: 350px;
 }
 
 .state-bar {
