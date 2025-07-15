@@ -13,10 +13,11 @@ import { Document } from '../../models/document.model';
 import { DocumentService } from '../../services/document.service';
 import { HttpClient } from '@angular/common/http';
 import { Candidate } from '../../models/candidate.model';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-offert-view',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './offer-view-company.html',
   styleUrls: ['./offer-view-company.scss']
 })

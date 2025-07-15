@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Location } from '@angular/common';
 import { ApplicationService } from '../../services/application.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-view-application',
@@ -18,7 +19,8 @@ export class ViewApplication implements OnInit {
   constructor(
     private http: HttpClient,
     private location: Location,
-    private applicationService: ApplicationService
+    private applicationService: ApplicationService,
+    private route: ActivatedRoute,
   ) {}
 
   goBack() {
@@ -27,13 +29,13 @@ export class ViewApplication implements OnInit {
 
   ngOnInit(): void {
 
-    //const id = Number(this.route.snapshot.paramMap.get('id'));
+    const id = Number(this.route.snapshot.paramMap.get('id'));
     // Busca application
-    this.http.get('http://localhost:8080/api/applications/8').subscribe({
+    this.http.get(`http://localhost:8080/api/applications/${id}`).subscribe({
       next: (data) => {
         this.application = data;
         // Busca candidate usando o endpoint novo
-        this.http.get('http://localhost:8080/api/applications/8/candidate').subscribe({
+        this.http.get(`http://localhost:8080/api/applications/${id}/candidate`).subscribe({
           next: (cand) => this.candidate = cand,
           error: (err) => console.error('Erro ao buscar candidate:', err)
         });
