@@ -40,6 +40,17 @@ export class CandidateService {
     return this.http.put<Candidate>(this.apiUrlToken, candidate, { headers });
   }
 
+  checkEmailExists(email: string): Observable<boolean> {
+    const token = localStorage.getItem('jwtToken');
+    if (!token) throw new Error('Token não encontrado no localStorage.');
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+
+    return this.http.get<boolean>(`${this.apiUrlToken}/check-email?email=${email}`, { headers });
+  }
+
   
 
 

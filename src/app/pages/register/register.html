@@ -1,196 +1,550 @@
 <!-- Register Form -->
 <div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-6 col-lg-4">
-            <div class="card shadow-sm" [class.slide-out]="success">
-                <div class="card-body">
-                    <h2 class="text-center mb-4" style="color: #2C3E50;">Register</h2>
-                    <!-- Toggle between candidate and company registration -->
-                    <div class="mb-3 d-flex justify-content-center gap-2">
-                        <button class="btn" [class]="selectedType === 'candidate' ? 'btn-danger' : 'btn-outline-danger'"
-                            (click)="selectedType = 'candidate'">
-                            Candidate
-                        </button>
-                        <button class="btn" [class]="selectedType === 'company' ? 'btn-danger' : 'btn-outline-danger'"
-                            (click)="selectedType = 'company'">
-                            Company
-                        </button>
-                    </div>
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-4">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h2 class="text-center mb-4" style="color: #2c3e50">Register</h2>
+          <!-- Toggle between candidate and company registration -->
+          <div class="mb-3 d-flex justify-content-center gap-2">
+            <button
+              class="btn"
+              [class]="
+                selectedType === 'candidate'
+                  ? 'btn-danger'
+                  : 'btn-outline-danger'
+              "
+              (click)="selectedType = 'candidate'"
+            >
+              Candidate
+            </button>
+            <button
+              class="btn"
+              [class]="
+                selectedType === 'company' ? 'btn-danger' : 'btn-outline-danger'
+              "
+              (click)="selectedType = 'company'"
+            >
+              Company
+            </button>
+          </div>
 
-                    <!-- Candidate Registration Form -->
-                    <form *ngIf="selectedType === 'candidate'" [formGroup]="candidateForm"
-                        (ngSubmit)="onSubmitCandidate()" class="needs-validation" novalidate>
-                        
-                        <div class="mb-3">
-                            <label for="candidateName" class="form-label">Name</label>
-                            <input type="text" id="candidateName" formControlName="name" class="form-control"
-                                placeholder="Enter your name"
-                                [class.is-invalid]="candidateForm.get('name')?.invalid && candidateForm.get('name')?.touched" />
-                            <div class="invalid-feedback"
-                                *ngIf="candidateForm.get('name')?.invalid && candidateForm.get('name')?.touched">
-                                Name is required.
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="candidateEmail" class="form-label">Email</label>
-                            <input type="email" id="candidateEmail" formControlName="email" class="form-control"
-                                placeholder="Enter email"
-                                [class.is-invalid]="candidateForm.get('email')?.invalid && candidateForm.get('email')?.touched" />
-                            <div class="invalid-feedback"
-                                *ngIf="candidateForm.get('email')?.invalid && candidateForm.get('email')?.touched">
-                                Please enter a valid email.
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="candidatePassword" class="form-label">Password</label>
-                            <input type="password" id="candidatePassword" formControlName="password"
-                                class="form-control" placeholder="Enter password"
-                                [class.is-invalid]="candidateForm.get('password')?.invalid && candidateForm.get('password')?.touched" />
-                            <div class="invalid-feedback"
-                                *ngIf="candidateForm.get('password')?.invalid && candidateForm.get('password')?.touched">
-                                Password is required.
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="candidateAddress" class="form-label">Address</label>
-                            <input type="text" id="candidateAddress" formControlName="address" class="form-control"
-                                placeholder="Enter address"
-                                [class.is-invalid]="candidateForm.get('address')?.invalid && candidateForm.get('address')?.touched" />
-                            <div class="invalid-feedback"
-                                *ngIf="candidateForm.get('address')?.invalid && candidateForm.get('address')?.touched">
-                                Address is required.
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="candidatePhone" class="form-label">Phone</label>
-                            <input type="tel" id="candidatePhone" formControlName="phone" class="form-control"
-                                placeholder="Enter phone"
-                                [class.is-invalid]="candidateForm.get('phone')?.invalid && candidateForm.get('phone')?.touched" />
-                            <div class="invalid-feedback"
-                                *ngIf="candidateForm.get('phone')?.invalid && candidateForm.get('phone')?.touched">
-                                Phone is required.
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="candidateBirthDate" class="form-label">Birth Date</label>
-                            <input type="date" id="candidateBirthDate" formControlName="birthDate" class="form-control"
-                                [class.is-invalid]="candidateForm.get('birthDate')?.invalid && candidateForm.get('birthDate')?.touched" />
-                            <div class="invalid-feedback"
-                                *ngIf="candidateForm.get('birthDate')?.invalid && candidateForm.get('birthDate')?.touched">
-                                Birth date is required.
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="candidateProfilePic" class="form-label">Profile Picture</label>
-                            <input type="file" id="candidateProfilePic" class="form-control"
-                                (change)="onProfilePicSelected($event, 'candidate')" accept="image/*" />
-                        </div>
-                        <div class="text-center">
-                            <button type="submit" class="btn" style="background-color: #C0392B; color: white;"
-                                [disabled]="candidateForm.invalid">
-                                Register as Candidate
-                            </button>
-                        </div>
-                    </form>
-
-                    <!-- Company Registration Form -->
-                    <form *ngIf="selectedType === 'company'" [formGroup]="companyForm" (ngSubmit)="onSubmitCompany()"
-                        class="needs-validation" novalidate>
-                        <div class="mb-3">
-                            <label for="companyName" class="form-label">Name</label>
-                            <input type="text" id="companyName" formControlName="name" class="form-control"
-                                placeholder="Enter company name"
-                                [class.is-invalid]="companyForm.get('name')?.invalid && companyForm.get('name')?.touched" />
-                            <div class="invalid-feedback"
-                                *ngIf="companyForm.get('name')?.invalid && companyForm.get('name')?.touched">
-                                Name is required.
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="companyEmail" class="form-label">Email</label>
-                            <input type="email" id="companyEmail" formControlName="email" class="form-control"
-                                placeholder="Enter email"
-                                [class.is-invalid]="companyForm.get('email')?.invalid && companyForm.get('email')?.touched" />
-                            <div class="invalid-feedback"
-                                *ngIf="companyForm.get('email')?.invalid && companyForm.get('email')?.touched">
-                                Please enter a valid email.
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="companyPassword" class="form-label">Password</label>
-                            <input type="password" id="companyPassword" formControlName="password" class="form-control"
-                                placeholder="Enter password"
-                                [class.is-invalid]="companyForm.get('password')?.invalid && companyForm.get('password')?.touched" />
-                            <div class="invalid-feedback"
-                                *ngIf="companyForm.get('password')?.invalid && companyForm.get('password')?.touched">
-                                Password is required.
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="companyAddress" class="form-label">Address</label>
-                            <input type="text" id="companyAddress" formControlName="address" class="form-control"
-                                placeholder="Enter address"
-                                [class.is-invalid]="companyForm.get('address')?.invalid && companyForm.get('address')?.touched" />
-                            <div class="invalid-feedback"
-                                *ngIf="companyForm.get('address')?.invalid && companyForm.get('address')?.touched">
-                                Address is required.
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="companyPhone" class="form-label">Phone</label>
-                            <input type="tel" id="companyPhone" formControlName="phone" class="form-control"
-                                placeholder="Enter phone"
-                                [class.is-invalid]="companyForm.get('phone')?.invalid && companyForm.get('phone')?.touched" />
-                            <div class="invalid-feedback"
-                                *ngIf="companyForm.get('phone')?.invalid && companyForm.get('phone')?.touched">
-                                Phone is required.
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="companyDescription" class="form-label">Description</label>
-                            <input type="text" id="companyDescription" formControlName="description"
-                                class="form-control" placeholder="Enter description"
-                                [class.is-invalid]="companyForm.get('description')?.invalid && companyForm.get('description')?.touched" />
-                            <div class="invalid-feedback"
-                                *ngIf="companyForm.get('description')?.invalid && companyForm.get('description')?.touched">
-                                Description is required.
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="companyArea" class="form-label">Area</label>
-                            <input type="text" id="companyArea" formControlName="area" class="form-control"
-                                placeholder="Enter area"
-                                [class.is-invalid]="companyForm.get('area')?.invalid && companyForm.get('area')?.touched" />
-                            <div class="invalid-feedback"
-                                *ngIf="companyForm.get('area')?.invalid && companyForm.get('area')?.touched">
-                                Area is required.
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="companyNipc" class="form-label">NIPC</label>
-                            <input type="number" id="companyNipc" formControlName="nipc" class="form-control"
-                                placeholder="Enter NIPC"
-                                [class.is-invalid]="companyForm.get('nipc')?.invalid && companyForm.get('nipc')?.touched" />
-                            <div class="invalid-feedback"
-                                *ngIf="companyForm.get('nipc')?.invalid && companyForm.get('nipc')?.touched">
-                                NIPC is required.
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="companyProfilePic" class="form-label">Profile Picture</label>
-                            <input type="file" id="companyProfilePic" class="form-control"
-                                (change)="onProfilePicSelected($event, 'company')" accept="image/*" />
-                        </div>
-                        <div class="text-center">
-                            <button type="submit" class="btn" style="background-color: #C0392B; color: white;"
-                                [disabled]="companyForm.invalid">
-                                Register as Company
-                            </button>
-                        </div>
-                    </form>
-                    <div class="flex-grow"></div>
-                </div>
+          <!-- Candidate Registration Form -->
+          <form
+            *ngIf="selectedType === 'candidate'"
+            [formGroup]="candidateForm"
+            (ngSubmit)="onSubmitCandidate()"
+            class="needs-validation"
+            novalidate
+          >
+            <div class="mb-3">
+              <label for="candidateName" class="form-label">Name</label>
+              <input
+                type="text"
+                id="candidateName"
+                formControlName="name"
+                class="form-control"
+                placeholder="Enter your name"
+                [class.is-invalid]="
+                  candidateForm.get('name')?.invalid &&
+                  candidateForm.get('name')?.touched
+                "
+              />
+              <small
+                *ngIf="candidateForm.get('name')?.errors?.['required']"
+                class="text-danger"
+                >Name is required</small
+              >
+              <small
+                *ngIf="candidateForm.get('name')?.errors?.['minlength']"
+                class="text-danger"
+                >Name must be at least 3 characters</small
+              >
+              <small
+                *ngIf="candidateForm.get('name')?.errors?.['maxlength']"
+                class="text-danger"
+                >Name cannot exceed 100 characters</small
+              >
             </div>
+            <div class="mb-3">
+              <label for="candidateEmail" class="form-label">Email</label>
+              <input
+                type="email"
+                id="candidateEmail"
+                formControlName="email"
+                class="form-control"
+                placeholder="Enter email"
+                [class.is-invalid]="
+                  candidateForm.get('email')?.invalid &&
+                  candidateForm.get('email')?.touched
+                "
+                (blur)="onEmailBlur()"
+              />
+              <small
+                *ngIf="candidateForm.get('email')?.errors?.['required']"
+                class="text-danger"
+              >
+                Email is required.
+              </small>
+              <small
+                *ngIf="candidateForm.get('email')?.errors?.['email']"
+                class="text-danger"
+              >
+                Invalid email format.
+              </small>
+              <small
+               *ngIf="candidateForm.get('email')?.hasError('emailTaken')"
+                class="text-danger"
+              >
+                {{ emailErrorMessage  }}
+              </small>
+            </div>
+            <div class="mb-3">
+              <label for="candidatePassword" class="form-label">Password</label>
+              <input
+                type="password"
+                id="candidatePassword"
+                formControlName="password"
+                class="form-control"
+                placeholder="Enter password"
+                [class.is-invalid]="
+                  candidateForm.get('password')?.invalid &&
+                  candidateForm.get('password')?.touched
+                "
+              />
+
+              <small
+                *ngIf="candidateForm.get('password')?.errors?.['required']"
+                class="text-danger"
+              >
+                Password is required.
+              </small>
+              <small
+                *ngIf="candidateForm.get('password')?.errors?.['minlength']"
+                class="text-danger"
+              >
+                Password must be at least 6 characters long.
+              </small>
+            </div>
+            <div class="mb-3">
+              <label for="candidateAddress" class="form-label">Address</label>
+              <input
+                type="text"
+                id="candidateAddress"
+                formControlName="address"
+                class="form-control"
+                placeholder="Enter address"
+                [class.is-invalid]="
+                  candidateForm.get('address')?.invalid &&
+                  candidateForm.get('address')?.touched
+                "
+              />
+
+              <small
+                *ngIf="candidateForm.get('address')?.errors?.['required']"
+                class="text-danger"
+              >
+                Address is required.
+              </small>
+            </div>
+            <div class="mb-3">
+              <label for="candidatePhone" class="form-label">Phone</label>
+              <input
+                type="tel"
+                id="candidatePhone"
+                formControlName="phone"
+                class="form-control"
+                placeholder="Enter phone"
+                [class.is-invalid]="
+                  candidateForm.get('phone')?.invalid &&
+                  candidateForm.get('phone')?.touched
+                "
+              />
+              <div
+                class="invalid-feedback"
+                *ngIf="
+                  candidateForm.get('phone')?.invalid &&
+                  candidateForm.get('phone')?.touched
+                "
+              >
+                <small
+                  *ngIf="candidateForm.get('phone')?.errors?.['required']"
+                  class="text-danger"
+                >
+                  Phone number is required.
+                </small>
+                <small
+                  *ngIf="candidateForm.get('phone')?.errors?.['pattern']"
+                  class="text-danger"
+                >
+                  Phone number must be exactly 9 digits.
+                </small>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="candidateBirthDate" class="form-label"
+                >Birth Date</label
+              >
+              <input
+                type="date"
+                id="candidateBirthDate"
+                formControlName="birthDate"
+                class="form-control"
+                [class.is-invalid]="
+                  candidateForm.get('birthDate')?.invalid &&
+                  candidateForm.get('birthDate')?.touched
+                "
+              />
+              <small
+                *ngIf="candidateForm.get('birthDate')?.errors?.['required']"
+                class="text-danger"
+              >
+                Please select a birth date.
+              </small>
+              <small
+                *ngIf="candidateForm.get('birthDate')?.errors?.['ageLessThan18']"
+                class="text-danger"
+              >
+                You must be at least 18 years old.
+              </small>
+            </div>
+            <div class="mb-3">
+              <label for="candidateProfilePic" class="form-label"
+                >Profile Picture</label
+              >
+              <input
+                type="file"
+                id="candidateProfilePic"
+                class="form-control"
+                (change)="onProfilePicSelected($event, 'candidate')"
+                accept="image/*"
+                [class.is-invalid]="
+                  candidateForm.get('documents')?.invalid &&
+                  candidateForm.get('documents')?.touched
+                "
+              />
+              <small
+                *ngIf="candidateForm.get('documents')?.errors?.['required']"
+                class="text-danger"
+              >
+                File is required
+              </small>
+              <small
+                *ngIf="candidateForm.get('documents')?.errors?.['maxSize']"
+                class="text-danger"
+              >
+                File must be smaller than 1mb.
+              </small>
+            </div>
+            <div class="text-center">
+              <button
+                type="submit"
+                class="btn"
+                style="background-color: #c0392b; color: white"
+                [disabled]="candidateForm.invalid"
+              >
+                Register as Candidate
+              </button>
+            </div>
+          </form>
+
+          <!-- Company Registration Form -->
+          <form
+            *ngIf="selectedType === 'company'"
+            [formGroup]="companyForm"
+            (ngSubmit)="onSubmitCompany()"
+            class="needs-validation"
+            novalidate
+          >
+            <div class="mb-3">
+              <label for="companyName" class="form-label">Name</label>
+              <input
+                type="text"
+                id="companyName"
+                formControlName="name"
+                class="form-control"
+                placeholder="Enter company name"
+                [class.is-invalid]="
+                  companyForm.get('name')?.invalid &&
+                  companyForm.get('name')?.touched
+                "
+              />
+
+              <small
+                *ngIf="companyForm.get('name')?.errors?.['required']"
+                class="text-danger"
+                >Name is required</small
+              >
+              <small
+                *ngIf="companyForm.get('name')?.errors?.['minlength']"
+                class="text-danger"
+                >Name must be at least 3 characters</small
+              >
+              <small
+                *ngIf="companyForm.get('name')?.errors?.['maxlength']"
+                class="text-danger"
+                >Name cannot exceed 100 characters</small
+              >
+            </div>
+            <div class="mb-3">
+              <label for="companyEmail" class="form-label">Email</label>
+              <input
+                type="email"
+                id="companyEmail"
+                formControlName="email"
+                class="form-control"
+                placeholder="Enter email"
+                [class.is-invalid]="
+                  companyForm.get('email')?.invalid &&
+                  companyForm.get('email')?.touched
+                "
+              />
+              <small
+                *ngIf="companyForm.get('email')?.errors?.['required']"
+                class="text-danger"
+              >
+                Email is required.
+              </small>
+              <small
+                *ngIf="companyForm.get('email')?.errors?.['email']"
+                class="text-danger"
+              >
+                Invalid email format.
+              </small>
+             <small
+               *ngIf="companyForm.get('email')?.hasError('emailTaken')"
+                class="text-danger"
+              >
+                {{ emailErrorMessage  }}
+              </small>
+            </div>
+            <div class="mb-3">
+              <label for="companyPassword" class="form-label">Password</label>
+              <input
+                type="password"
+                id="companyPassword"
+                formControlName="password"
+                class="form-control"
+                placeholder="Enter password"
+                [class.is-invalid]="
+                  companyForm.get('password')?.invalid &&
+                  companyForm.get('password')?.touched
+                "
+              />
+              <small
+                *ngIf="candidateForm.get('password')?.errors?.['required']"
+                class="text-danger"
+              >
+                Password is required.
+              </small>
+              <small
+                *ngIf="candidateForm.get('password')?.errors?.['minlength']"
+                class="text-danger"
+              >
+                Password must be at least 6 characters long.
+              </small>
+            </div>
+            <div class="mb-3">
+              <label for="companyAddress" class="form-label">Address</label>
+              <input
+                type="text"
+                id="companyAddress"
+                formControlName="address"
+                class="form-control"
+                placeholder="Enter address"
+                [class.is-invalid]="
+                  companyForm.get('address')?.invalid &&
+                  companyForm.get('address')?.touched
+                "
+              />
+              <div
+                class="invalid-feedback"
+                *ngIf="
+                  companyForm.get('address')?.invalid &&
+                  companyForm.get('address')?.touched
+                "
+              >
+                <small
+                  *ngIf="companyForm.get('address')?.errors?.['required']"
+                  class="text-danger"
+                >
+                  Address is required.
+                </small>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="companyPhone" class="form-label">Phone</label>
+              <input
+                type="tel"
+                id="companyPhone"
+                formControlName="phone"
+                class="form-control"
+                placeholder="Enter phone"
+                [class.is-invalid]="
+                  companyForm.get('phone')?.invalid &&
+                  companyForm.get('phone')?.touched
+                "
+              />
+              <div
+                class="invalid-feedback"
+                *ngIf="
+                  companyForm.get('phone')?.invalid &&
+                  companyForm.get('phone')?.touched
+                "
+              >
+                <small
+                  *ngIf="companyForm.get('phone')?.errors?.['required']"
+                  class="text-danger"
+                >
+                  Phone number is required.
+                </small>
+                <small
+                  *ngIf="companyForm.get('phone')?.errors?.['pattern']"
+                  class="text-danger"
+                >
+                  Phone number must be exactly 9 digits.
+                </small>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="companyDescription" class="form-label"
+                >Description</label
+              >
+              <div class="editor-wrapper"></div>
+              <quill-editor
+                formControlName="description"
+                [modules]="editorModules"
+                [style]="{ height: '200px' }"
+                placeholder="Descreva sua empresa aqui..."
+                [class.is-invalid]="
+                  companyForm.get('description')?.invalid &&
+                  companyForm.get('description')?.touched
+                "
+              ></quill-editor>
+              <small
+                *ngIf="companyForm.get('description')?.errors?.['required']"
+                class="text-danger"
+              >
+                Description is required.
+              </small>
+              <small
+                *ngIf="companyForm.get('description')?.errors?.['minlength']"
+                class="text-danger"
+              >
+                Description must be at least 100 characters long.
+              </small>
+              <small
+                *ngIf="companyForm.get('description')?.errors?.['maxlength']"
+                class="text-danger"
+              >
+                The description must be up to 500 characters long.
+              </small>
+            </div>
+            <div class="mb-3">
+              <label for="companyArea" class="form-label">Area</label>
+              <input
+                type="text"
+                id="companyArea"
+                formControlName="area"
+                class="form-control"
+                placeholder="Enter area"
+                [class.is-invalid]="
+                  companyForm.get('area')?.invalid &&
+                  companyForm.get('area')?.touched
+                "
+              />
+              <div
+                class="invalid-feedback"
+                *ngIf="
+                  companyForm.get('area')?.invalid &&
+                  companyForm.get('area')?.touched
+                "
+              >
+                <small
+                  *ngIf="companyForm.get('area')?.errors?.['required']"
+                  class="text-danger"
+                >
+                  Area is required.
+                </small>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="companyNipc" class="form-label">NIPC</label>
+              <input
+                type="number"
+                id="companyNipc"
+                formControlName="nipc"
+                class="form-control"
+                placeholder="Enter NIPC"
+                [class.is-invalid]="
+                  companyForm.get('nipc')?.invalid &&
+                  companyForm.get('nipc')?.touched
+                "
+              />
+              <div
+                class="invalid-feedback"
+                *ngIf="
+                  companyForm.get('nipc')?.invalid &&
+                  companyForm.get('nipc')?.touched
+                "
+              >
+                <div
+                  *ngIf="
+                    companyForm.get('nipc')?.touched &&
+                    companyForm.get('nipc')?.invalid
+                  "
+                >
+                  <small *ngIf="companyForm.get('nipc')?.errors?.['required']">
+                    NIPC é obrigatório.
+                  </small>
+                  <small *ngIf="companyForm.get('nipc')?.errors?.['pattern']">
+                    NIPC deve ter exatamente 9 dígitos numéricos.
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="companyProfilePic" class="form-label"
+                >Profile Picture</label
+              >
+              <input
+                type="file"
+                id="companyProfilePic"
+                class="form-control"
+                (change)="onProfilePicSelected($event, 'company')"
+                accept="image/*"
+                [class.is-invalid]="
+                  companyForm.get('documents')?.invalid &&
+                  companyForm.get('documents')?.touched
+                "
+              />
+              <small
+                *ngIf="companyForm.get('documents')?.errors?.['required']"
+                class="text-danger"
+              >
+                Profile picture is required.
+              </small>
+              <small
+                *ngIf="companyForm.get('documents')?.errors?.['maxSize']"
+                class="text-danger"
+              >
+                File must be smaller than 1mb.
+              </small>
+            </div>
+            <div class="text-center">
+              <button
+                type="submit"
+                class="btn"
+                style="background-color: #c0392b; color: white"
+                [disabled]="companyForm.invalid"
+              >
+                Register as Company
+              </button>
+            </div>
+          </form>
+          <div class="flex-grow"></div>
         </div>
+      </div>
     </div>
+  </div>
 </div>

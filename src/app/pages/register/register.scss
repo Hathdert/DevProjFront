@@ -97,22 +97,15 @@ body {
 .text-center.mt-3 {
   margin-top: 2rem;
 }
-
-@keyframes slideOutUp {
-  0% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-  80% {
-    opacity: 1;
-    transform: translateY(-40px) scale(1.05);
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(-400px) scale(0.8);
-  }
+small{
+  margin-left: 2%;;
+  font-size: 0.875em;
 }
-
-.slide-out {
-  animation: slideOutUp 2.5s forwards;
+.text-danger {
+  color: #E74C3C;
+} 
+quill-editor {
+  width: 100%;          
+  max-width: 100%;     
+  box-sizing: border-box; 
 }
