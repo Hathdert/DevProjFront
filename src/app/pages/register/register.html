@@ -93,10 +93,10 @@
                 Invalid email format.
               </small>
               <small
-                *ngIf="candidateForm.get('email')?.hasError('serverError')"
+               *ngIf="candidateForm.get('email')?.hasError('emailTaken')"
                 class="text-danger"
               >
-                {{ candidateForm.get("email")?.getError("serverError") }}
+                {{ emailErrorMessage  }}
               </small>
             </div>
             <div class="mb-3">
@@ -311,11 +311,11 @@
               >
                 Invalid email format.
               </small>
-              <small
-                *ngIf="companyForm.get('email')?.hasError('serverError')"
+             <small
+               *ngIf="companyForm.get('email')?.hasError('emailTaken')"
                 class="text-danger"
               >
-                {{ companyForm.get("email")?.getError("serverError") }}
+                {{ emailErrorMessage  }}
               </small>
             </div>
             <div class="mb-3">
