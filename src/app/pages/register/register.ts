@@ -291,7 +291,8 @@ export class RegisterComponent {
   }
 
   emailErrorMessage: string | null = null;
-
+  // Function to check if email is already taken
+  // This function is called on email input blur
   onEmailBlur() {
     const emailControl = this.candidateForm.get('email');
     if (!emailControl || !emailControl.value) {
@@ -310,11 +311,11 @@ export class RegisterComponent {
 
           // Set error with emailTaken
           emailControl.setErrors({ ...emailControl.errors, emailTaken: true });
-          // Guarda a mensagem da API para mostrar no template
+          // Set the error message
           this.emailErrorMessage =
             response.message || 'Email is already in use.';
         } else {
-          // Limpa o erro emailTaken e a mensagem
+          // Remove emailTaken error if it exists
           if (emailControl.hasError('emailTaken')) {
             const errors = { ...emailControl.errors };
             delete errors['emailTaken'];

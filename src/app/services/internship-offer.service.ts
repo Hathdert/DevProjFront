@@ -68,6 +68,9 @@ getOfferByIdToken(id: number): Observable<InternshipOfferSimple> {
     map(response => response.offer)
   );
 }
+getOfferWithApplications(offerId: number): Observable<any> {
+  return this.http.get(`/api/offer/token/${offerId}`);
+}
 
   getCompanyByOfferId(offerId: number): Observable<CompanyOffer> {
     return this.http.get<CompanyOffer>(`http://localhost:8080/api/companies/by-offer/${offerId}`);
