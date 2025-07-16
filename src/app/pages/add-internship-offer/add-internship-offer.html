@@ -3,42 +3,72 @@
     <div class="col-lg-8">
       <div class="card shadow-lg border-0 p-4" id="tilt-card" [class.slide-out]="success" style="border-radius: 1.5rem; background: #fff;">
         <h2 class="text-center fw-bold mb-4" style="color: #2C3E50; font-size: 2.2rem;">New Internship</h2>
-        <form (ngSubmit)="submit()" #offerForm="ngForm">
+        <form (ngSubmit)="submit(offerForm)" #offerForm="ngForm">
           <div class="row g-4">
             <div class="col-md-6">
               <label class="form-label">Title</label>
-              <input class="form-control" [(ngModel)]="offer.title" name="title" required>
+              <input class="form-control" [(ngModel)]="offer.title" name="title" required #title="ngModel">
+              <div class="invalid-feedback d-block" *ngIf="title.invalid && title.touched">
+                Please fill in the Title field.
+              </div>
             </div>
             <div class="col-md-6">
               <label class="form-label">Area</label>
-              <input class="form-control" [(ngModel)]="offer.area" name="area" required>
+              <input class="form-control" [(ngModel)]="offer.area" name="area" required #area="ngModel">
+              <div class="invalid-feedback d-block" *ngIf="area.invalid && area.touched">
+                Please fill in the Area field.
+              </div>
             </div>
             <div class="col-md-12">
               <label class="form-label">Description</label>
-              <textarea class="form-control" [(ngModel)]="offer.description" name="description" rows="2" required></textarea>
+              <textarea class="form-control" [(ngModel)]="offer.description" name="description" rows="2" required #description="ngModel"></textarea>
+              <div class="invalid-feedback d-block" *ngIf="description.invalid && description.touched">
+                Please fill in the Description field.
+              </div>
             </div>
             <div class="col-md-12">
               <label class="form-label">Requirements</label>
-              <input class="form-control" [(ngModel)]="offer.requirements" name="requirements" required>
+              <input class="form-control" [(ngModel)]="offer.requirements" name="requirements" required #requirements="ngModel">
+              <div class="invalid-feedback d-block" *ngIf="requirements.invalid && requirements.touched">
+                Please fill in the Requirements field.
+              </div>
             </div>
             <div class="col-md-6">
               <label class="form-label">Start Date</label>
-              <input type="date" class="form-control" [(ngModel)]="offer.startDate" name="startDate" required>
+              <input type="date" class="form-control" [(ngModel)]="offer.startDate" name="startDate" required #startDate="ngModel" [min]="today">
+              <div class="invalid-feedback d-block" *ngIf="startDate.invalid && startDate.touched">
+                Please select the Start Date.
+              </div>
             </div>
             <div class="col-md-6">
               <label class="form-label">End Date</label>
-              <input type="date" class="form-control" [(ngModel)]="offer.endDate" name="endDate" required>
+              <input type="date" class="form-control" [(ngModel)]="offer.endDate" name="endDate" required #endDate="ngModel" [min]="today">
+              <div class="invalid-feedback d-block" *ngIf="endDate.invalid && endDate.touched">
+                Please select the End Date.
+              </div>
             </div>
             <div class="col-md-6">
               <label class="form-label">Vacancies</label>
-              <input type="number" class="form-control" [(ngModel)]="offer.vacancies" name="vacancies" required min="1">
+              <input type="number" class="form-control" [(ngModel)]="offer.vacancies" name="vacancies" required min="1" #vacancies="ngModel">
+              <div class="invalid-feedback d-block" *ngIf="vacancies.invalid && vacancies.touched">
+                Please enter the number of Vacancies (minimum 1).
+              </div>
             </div>
             <div class="col-md-12 d-flex align-items-center mb-2">
-              <input type="checkbox" class="form-check-input me-2" [(ngModel)]="offer.offer" name="isOffer" id="isOffer">
+              <input type="checkbox" class="form-check-input me-2" [(ngModel)]="offer.offer" name="isOffer" id="isOffer" required #isOffer="ngModel">
               <label class="form-check-label" for="isOffer">Is active?</label>
+              <div class="invalid-feedback d-block ms-2" *ngIf="isOffer.invalid && isOffer.touched">
+                Please confirm if the offer is active.
+              </div>
             </div>
           </div>
-          <button class="btn btn-primary w-100 mt-4 py-2" type="submit" style="font-size: 1.15rem;">Add Offer</button>
+          <button 
+            class="btn btn-primary w-100 mt-4 py-2" 
+            type="submit" 
+            style="font-size: 1.15rem;" 
+            [disabled]="offerForm.invalid">
+            Add Offer
+          </button>
           <div *ngIf="success" class="alert alert-success mt-3">Offer added successfully!</div>
           <div *ngIf="error" class="alert alert-danger mt-3">{{ error }}</div>
         </form>

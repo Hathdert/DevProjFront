@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { InternshipOfferService } from '../../services/internship-offer.service';
 import { InternshipOfferCreate } from '../../models/internship-offer-create.model';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CompanyService } from '../../services/company.service';
 
@@ -16,6 +16,7 @@ import { CompanyService } from '../../services/company.service';
 export class AddInternshipOfferComponent {
     id: number = parseInt(window.location.pathname.split('/').pop() || '0', 10); //testar
     companyId: number = 0; // novo campo para guardar o id da company
+    today: string = new Date().toISOString().split('T')[0];
 
   offer: InternshipOfferCreate = {
     title: '',
@@ -48,14 +49,20 @@ export class AddInternshipOfferComponent {
     });
   }
 
-  submit() {
+  submit(offerForm: NgForm) {
+    if (offerForm.invalid) {
+      Object.values(offerForm.controls).forEach(control => {
+        control.markAsTouched();
+      });
+      return;
+    }
     this.offerService.createOffer(this.offer).subscribe({
       next: () => {
         this.success = true;
         this.error = '';
         setTimeout(() => {
           this.router.navigate(['/home']);
-        }, 2500); // tempo igual ao da animação
+        }, 2500);
       },
       error: err => {
         this.success = false;
