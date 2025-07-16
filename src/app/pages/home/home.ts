@@ -8,6 +8,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { HomeService } from '../../services/home.service';
 
 @Component({
   selector: 'app-home',
@@ -23,7 +24,7 @@ export class Home implements OnInit {
 
   constructor(
     private offerService: InternshipOfferService,
-    private http: HttpClient
+    private homeService: HomeService // injete o HomeService
   ) {}
 
   ngOnInit(): void {
@@ -36,15 +37,14 @@ export class Home implements OnInit {
       }
     });
 
-    // Buscar top 6 companies
-    this.http.get<Company[]>('http://localhost:8080/api/companies/top6-by-applications')
-      .subscribe({
-        next: (data) => {
-          this.topCompanies = data;
-        },
-        error: (err) => {
-          console.error('Erro ao buscar empresas:', err);
-        }
-      });
+    // Buscar top 6 companies usando HomeService
+    this.homeService.getTop6Companies().subscribe({
+      next: (data) => {
+        this.topCompanies = data;
+      },
+      error: (err) => {
+        console.error('Erro ao buscar empresas:', err);
+      }
+    });
   }
 }
