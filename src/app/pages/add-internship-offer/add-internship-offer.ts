@@ -4,6 +4,7 @@ import { InternshipOfferCreate } from '../../models/internship-offer-create.mode
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CompanyService } from '../../services/company.service';
 
 @Component({
   selector: 'app-add-internship-offer',
@@ -13,6 +14,9 @@ import { Router } from '@angular/router';
   
 })
 export class AddInternshipOfferComponent {
+    id: number = parseInt(window.location.pathname.split('/').pop() || '0', 10); //testar
+    companyId: number = 0; // novo campo para guardar o id da company
+
   offer: InternshipOfferCreate = {
     title: '',
     description: '',
@@ -27,7 +31,22 @@ export class AddInternshipOfferComponent {
   success = false;
   error = '';
 
-  constructor(private offerService: InternshipOfferService, private router: Router) {}
+  constructor(
+    private offerService: InternshipOfferService,
+    private companyService: CompanyService, // injete aqui
+    private router: Router
+  ) {
+    // Busca o id da company ao iniciar o componente
+    this.companyService.getCompanyByToken().subscribe({
+      next: (company) => {
+        this.companyId = company.id;
+        this.offer.company.id = company.id; // já preenche no objeto offer
+      },
+      error: () => {
+        this.companyId = 0;
+      }
+    });
+  }
 
   submit() {
     this.offerService.createOffer(this.offer).subscribe({

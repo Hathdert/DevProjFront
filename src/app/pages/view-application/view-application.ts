@@ -52,4 +52,22 @@ export class ViewApplication implements OnInit {
       error: () => alert('Failed to change application status'),
     });
   }
+
+  downloadCV(applicationId: number) {
+    this.http.get(`http://localhost:8080/api/documents/application/${applicationId}/download`, {
+      responseType: 'blob'
+    }).subscribe({
+      next: (blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'cv.pdf';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        window.URL.revokeObjectURL(url);
+      },
+      error: () => alert('Erro ao baixar o arquivo.')
+    });
+  }
 }

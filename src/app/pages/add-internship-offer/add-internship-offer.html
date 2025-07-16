@@ -33,10 +33,6 @@
               <label class="form-label">Vacancies</label>
               <input type="number" class="form-control" [(ngModel)]="offer.vacancies" name="vacancies" required min="1">
             </div>
-            <div class="col-md-6">
-              <label class="form-label">Company ID</label>
-              <input type="number" class="form-control" [(ngModel)]="offer.company.id" name="companyId" required min="1">
-            </div>
             <div class="col-md-12 d-flex align-items-center mb-2">
               <input type="checkbox" class="form-check-input me-2" [(ngModel)]="offer.offer" name="isOffer" id="isOffer">
               <label class="form-check-label" for="isOffer">Is active?</label>
