@@ -13,6 +13,7 @@ import { OffertView } from './pages/offert-view/offert-view';
 import { CandidateProfile } from './pages/candidate-profile/candidate-profile';
 import { OfferViewCompany } from './pages/offer-view-company/offer-view-company';
 import { ViewApplication } from './pages/view-application/view-application';
+import { FaqComponent } from './pages/faq/faq';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -28,5 +29,6 @@ export const routes: Routes = [
   { path: 'offers/:id', component: OffertView },
   { path: 'company-offer/:id', component: OfferViewCompany },
   { path: 'view-application/:id', component: ViewApplication },
+  { path: 'faq', component: FaqComponent },
   { path: '**', redirectTo: 'login' },
 ];
