@@ -142,13 +142,13 @@
               alt="Offer Image"
             />
             <div class="card-body">
-              <h5 class="card-title">{{ app.internshipOffer?.title }}</h5>
-              <p class="card-text">{{ app.internshipOffer?.description }}</p>
+              <h5 class="card-title">{{ app.internshipOffer.title }}</h5>
+              <p class="card-text">{{ app.internshipOffer.description }}</p>
               <p class="card-text">
                 <strong>Start Date:</strong>
-                {{ app.internshipOffer?.startDate | date }}<br />
+                {{ app.internshipOffer.startDate | date }}<br />
                 <strong>End Date:</strong>
-                {{ app.internshipOffer?.endDate | date }}
+                {{ app.internshipOffer.endDate | date }}
               </p>
                 <div class="container__card">
               <span *ngIf="app.state === 0" class="badge bg-warning text-dark"

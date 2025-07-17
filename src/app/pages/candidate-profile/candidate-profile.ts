@@ -129,6 +129,7 @@ export class CandidateProfile {
       });
     },
   });
+}
   deleteCandidate(password: string) {
     this.candidateService.deleteCandidateByToken(password).subscribe({
       next: () => {
@@ -146,7 +147,7 @@ export class CandidateProfile {
       },
     });
   }
-}
+
 
   deletarAplicacaoUnica(applicationId: number): void {
     Swal.fire({
