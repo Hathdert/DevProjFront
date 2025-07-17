@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { AuthService } from './auth';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-root',
@@ -61,7 +62,27 @@ export class App {
   }
 
   logout() {
-    this.auth.logout();
-    this.router.navigate(['/login']);
-  }
+  Swal.fire({
+    title: 'Deseja realmente sair?',
+    text: 'Você será desconectado do sistema.',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Sim, sair',
+    cancelButtonText: 'Cancelar',
+    
+  }).then((result) => {
+    if (result.isConfirmed) {
+      this.auth.logout();
+      this.router.navigate(['/login']);
+
+      Swal.fire({
+        icon: 'success',
+        title: 'Desconectado',
+        text: 'Você saiu com sucesso.',
+        timer: 1500,
+        showConfirmButton: false
+      });
+    }
+  });
+}
 }

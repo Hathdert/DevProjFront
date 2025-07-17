@@ -1,6 +1,6 @@
 body {
-  background-color: #BDC3C7; 
-  color: #2C3E50;
+  background-color: #bdc3c7;
+  color: #2c3e50;
 }
 
 /* Navbar */
@@ -16,14 +16,6 @@ body {
   object-position: center;
 }
 
-@media (max-width: 768px) {
-  .carousel-item img {
-    height: 550px;
-    object-fit: cover;
-    object-position: center;
-  }
-}
-
 /* Filter and Search */
 .container > .d-flex {
   gap: 10px;
@@ -36,7 +28,7 @@ body {
 /* Cards */
 .card {
   border-radius: 0.75rem;
-  box-shadow: 0 0.5rem 1.5rem rgba(44,62,80,0.10);
+  box-shadow: 0 0.5rem 1.5rem rgba(44, 62, 80, 0.1);
   transition: transform 0.3s, box-shadow 0.3s;
   background: #fff;
   border: none;
@@ -47,13 +39,13 @@ body {
 
 .card:hover {
   transform: translateY(-8px) scale(1.03);
-  box-shadow: 0 1rem 2rem rgba(44,62,80,0.15);
+  box-shadow: 0 1rem 2rem rgba(44, 62, 80, 0.15);
 }
 
 .card-title {
   font-size: 1.25rem;
   font-weight: 700;
-  color: #C0392B;
+  color: #c0392b;
 }
 
 .card-text {
@@ -62,18 +54,18 @@ body {
 }
 
 .btn {
-  background-color: #C0392B;
+  background-color: #c0392b;
   color: #fff;
   border: none;
 }
 
 .btn:hover {
-  background-color: #A93226;
+  background-color: #a93226;
   color: #fff;
 }
 
 .badge {
-  background-color: #2C3E50;
+  background-color: #2c3e50;
   color: #fff;
   font-size: 0.85rem;
   font-weight: 600;
@@ -86,17 +78,17 @@ body {
 }
 
 .card-wrapper::-webkit-scrollbar-track {
-  background: white; 
+  background: white;
   border-radius: 10px;
 }
 
 .card-wrapper::-webkit-scrollbar-thumb {
-  background: #ccc; 
+  background: #ccc;
   border-radius: 10px;
 }
 
 .card-wrapper::-webkit-scrollbar-thumb:hover {
-  background: #aaa; 
+  background: #aaa;
 }
 
 .card-wrapper {
@@ -114,9 +106,10 @@ body {
 }
 
 /* Espaço extra entre os cards */
-.row.g-4, .row.g-5 {
-  row-gap: 2rem; 
-  column-gap: 2rem; 
+.row.g-4,
+.row.g-5 {
+  row-gap: 2rem; // aumenta o espaço vertical entre cards
+  column-gap: 2rem; // aumenta o espaço horizontal entre cards
 }
 
 /* Opcional: mais espaço abaixo do título */
@@ -161,12 +154,13 @@ h2.display-6 {
 .clippy-balloon {
   background: #fff;
   border-radius: 1rem;
-  box-shadow: 0 0.5rem 1rem rgba(44,62,80,0.15);
+  box-shadow: 0 0.5rem 1rem rgba(44, 62, 80, 0.15);
   padding: 1rem 1.5rem;
   margin-bottom: 0; // para não empurrar o clippy
   margin-right: 10px;
   font-size: 1.1rem;
-  color: #2C3E50;
+  color: #2c3e50;
+  border: 2px solid #c0392b;
   position: relative;
   width: 320px; // tamanho fixo do balão
   min-height: 48px; // altura mínima para o balão
@@ -178,11 +172,38 @@ h2.display-6 {
 }
 
 .clippy-balloon:after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -20px;
   left: 30px;
   border-width: 10px;
   border-style: solid;
   border-color: #fff transparent transparent transparent;
+}
+
+@media (max-width: 1200px) {
+  .col-md-4.col-lg-3 {
+    flex: 0 0 auto;
+    width: 40%;
+  }
+}
+
+@media (max-width: 1000px) {
+  .col-md-4.col-lg-3 {
+    flex: 0 0 auto;
+    width: 50%;
+  }
+}
+
+@media (max-width: 768px) {
+  .carousel-item img {
+    height: 550px;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .col-md-4.col-lg-3 {
+    flex: 0 0 auto;
+    width: 60%;
+  }
 }
