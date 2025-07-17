@@ -20,7 +20,7 @@
                 {{ company?.email }}
               </div>
               <button class="btn btn-primary btn-lg rounded-pill fw-bold mt-2 mb-5" style="min-width: 140px;"
-                (click)="showBack = true">
+                (click)="showBack = true" *ngIf="navBarValue === '1'">
                 Apply Now
               </button>
             </div>

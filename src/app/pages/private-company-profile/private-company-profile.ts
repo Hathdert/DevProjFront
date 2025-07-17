@@ -22,6 +22,8 @@ export class PrivateCompanyProfileComponent {
   offerStatusFilter: 'all' | 'active' | 'inactive' = 'all';
   isEditing = false;
   editCompanyData: Company = {} as Company;
+  showDeleteConfirm = false;
+  deletePassword = '';
 
   constructor(
     private router: Router,
@@ -106,4 +108,22 @@ export class PrivateCompanyProfileComponent {
     });
     
   }
+
+deleteCompany(password: string) {
+  this.companyService.deleteCompanyByToken(password).subscribe({
+    next: () => {
+      localStorage.removeItem('jwtToken');
+      this.router.navigate(['/login']);
+    },
+    error: (err) => {
+      if (err.status === 200 || err.status === 204) {
+        localStorage.removeItem('jwtToken');
+        this.router.navigate(['/login']);
+      } else {
+        console.error('Error deleting company:', err);
+        alert('Failed to delete company. Check your password.');
+      }
+    },
+  });
+}
 }

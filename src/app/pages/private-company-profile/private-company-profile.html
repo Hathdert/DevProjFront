@@ -37,12 +37,12 @@
                     <div class="col-md-6 mb-3">
                         <strong>NIPC:</strong>
                         <div *ngIf="!isEditing">{{ company.nipc }}</div>
-                        <input *ngIf="isEditing" [(ngModel)]="editCompanyData.nipc" class="form-control"/>
+                        <input *ngIf="isEditing" [(ngModel)]="editCompanyData.nipc" class="form-control" />
                     </div>
                     <div class="col-md-6 mb-3">
                         <strong>Area:</strong>
                         <div *ngIf="!isEditing">{{ company.area }}</div>
-                        <input *ngIf="isEditing" [(ngModel)]="editCompanyData.area" class="form-control"/>
+                        <input *ngIf="isEditing" [(ngModel)]="editCompanyData.area" class="form-control" />
                     </div>
                     <div class="col-md-6 mb-3">
                         <strong>Address:</strong>
@@ -61,6 +61,18 @@
                             Profile</button>
                         <button *ngIf="isEditing" class="btn btn-danger me-2" (click)="saveEdit()">Save</button>
                         <button *ngIf="isEditing" class="btn btn-secondary" (click)="cancelEdit()">Cancel</button>
+                        <button *ngIf="!isEditing && !showDeleteConfirm" class="btn btn-outline-dark ms-2"
+                            (click)="showDeleteConfirm = true">
+                            Delete Company
+                        </button>
+
+                        <div *ngIf="showDeleteConfirm" class="d-inline-block ms-2">
+                            <input type="password" [(ngModel)]="deletePassword" placeholder="Enter password"
+                                class="form-control d-inline-block w-auto" style="width:180px;" />
+                            <button class="btn btn-danger ms-1" (click)="deleteCompany(deletePassword)">Confirm</button>
+                            <button class="btn btn-secondary ms-1"
+                                (click)="showDeleteConfirm = false; deletePassword = '';">Cancel</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -102,7 +114,8 @@
                                 <span class="badge bg-secondary" *ngIf="!offer.offer">Inactive</span>
                             </td>
                             <td>
-                                <button (click)="changeOfferStatus(offer.id, !offer.offer); $event.stopPropagation()" class="btn btn-outline-danger">
+                                <button (click)="changeOfferStatus(offer.id, !offer.offer); $event.stopPropagation()"
+                                    class="btn btn-outline-danger">
                                     Change State
                                 </button>
                         </tr>

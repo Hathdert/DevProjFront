@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Company } from '../models/company.model';
+import { LoginComponent } from '../pages/login/login';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,21 @@ export class CompanyService {
 
     return this.http.get<Company>(this.apiUrlToken, { headers });
   }
+
+deleteCompanyByToken(password: string): Observable<any> {
+  const token = localStorage.getItem('jwtToken');
+  if (!token) throw new Error('Token não encontrado no localStorage.');
+
+  const headers = new HttpHeaders({
+    Authorization: `Bearer ${token}`,
+    'Content-Type': 'text/plain'
+  });
+
+  return this.http.request('delete', this.apiUrlToken, {
+    headers,
+    body: password
+  });
+}
 
   getCompanyById(id: number): Observable<Company> {
     const url = this.apiUrlId.replace('{id}', id.toString());

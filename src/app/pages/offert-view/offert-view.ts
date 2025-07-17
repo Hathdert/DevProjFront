@@ -18,7 +18,7 @@ import { HttpClient } from '@angular/common/http';
   selector: 'app-offert-view',
   imports: [CommonModule, FormsModule],
   templateUrl: './offert-view.html',
-  styleUrls: ['./offert-view.scss']
+  styleUrls: ['./offert-view.scss'],
 })
 export class OffertView {
   offer?: InternshipOfferSimple;
@@ -27,21 +27,22 @@ export class OffertView {
   success = false;
   error = '';
   applicationDocument: File | null = null;
+  navBarValue: string | null = null;
   application: ApplicationCreate = {
     candidate: { id: 0 },
     document: [],
     pitch: '',
     state: 0,
-    internshipOffer: { id: 0 }
+    internshipOffer: { id: 0 },
   };
   document: Document = {
-    fileName: '', 
+    fileName: '',
     fileType: '',
     filePath: '',
     uploadDate: '',
     company: null as any,
     candidate: null as any,
-    application: { id: 0 }
+    application: { id: 0 },
   };
 
   constructor(
@@ -60,19 +61,24 @@ export class OffertView {
       next: (data) => {
         this.offer = data;
         this.offerService.getCompanyByOfferId(id).subscribe({
-          next: (companyData) => this.company = companyData,
-          error: (err) => console.error('Erro ao buscar empresa:', err)
+          next: (companyData) => (this.company = companyData),
+          error: (err) => console.error('Erro ao buscar empresa:', err),
         });
       },
-      error: (err) => console.error('Erro ao buscar oferta:', err)
+      error: (err) => console.error('Erro ao buscar oferta:', err),
     });
     this.candidateService.getCandidateByToken().subscribe({
       next: (candidate) => {
         this.application.candidate.id = candidate.id;
         this.application.internshipOffer.id = this.offer?.id || 0;
       },
-      error: (err) => console.error('Erro ao buscar candidato:', err)
+      error: (err) => console.error('Erro ao buscar candidato:', err),
     });
+    const token = localStorage.getItem('jwtToken');
+    if (token) {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      this.navBarValue = payload.navBar || null;
+    }
   }
 
   goBack() {
@@ -91,7 +97,7 @@ export class OffertView {
     const formData = new FormData();
     formData.append('file', this.applicationDocument!);
     formData.append('applicationId', applicationId.toString());
-  
+
     this.http
       .post('http://localhost:8080/api/documents/upload/application', formData)
       .subscribe({
@@ -104,36 +110,32 @@ export class OffertView {
         },
       });
   }
-  
 
   submitApplication() {
     console.log('Submitting application:', this.application);
     this.applicationService.createApplication(this.application).subscribe({
       next: (createdApp) => {
-        console.log("Application createdApp: ", createdApp);
+        console.log('Application createdApp: ', createdApp);
         const appId = createdApp.id;
         console.log('Application created:', createdApp);
-  
+
         if (this.applicationDocument && appId) {
-          this.uploadDocument(appId);  // Upload only after app creation
+          this.uploadDocument(appId); // Upload only after app creation
         }
-  
+
         this.success = true;
         this.error = '';
         setTimeout(() => {
           this.showBack = false;
           this.success = false;
         }, 2000);
-        
       },
       error: () => {
         this.error = 'Error creating application!';
         console.error('[APPLICATION ERROR]', this.error);
         console.error('[APPLICATION ERROR]', this.application);
         this.success = false;
-      }
+      },
     });
   }
-  
-
 }

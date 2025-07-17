@@ -17,6 +17,8 @@ export class CandidateProfile {
   candidateImageUrl: string | null = null;
   isEditing = false;
   editCandidateData: Candidate = {} as Candidate;
+  showDeleteConfirm = false;
+  deletePassword = '';
 
   constructor(
     private router: Router,
@@ -41,18 +43,16 @@ export class CandidateProfile {
     });
   }
 
-  
-  
   startEdit() {
     this.isEditing = true;
-    this.editCandidateData = { 
+    this.editCandidateData = {
       ...(this.candidate as Candidate),
       name: this.candidate?.name ?? '',
       email: this.candidate?.email ?? '',
       address: this.candidate?.address ?? '',
       phone: this.candidate?.phone ?? '',
       birthDate: this.candidate?.birthDate ?? '',
-     };
+    };
   }
   cancelEdit() {
     this.isEditing = false;
@@ -71,5 +71,21 @@ export class CandidateProfile {
     });
   }
 
-
+  deleteCandidate(password: string) {
+    this.candidateService.deleteCandidateByToken(password).subscribe({
+      next: () => {
+        localStorage.removeItem('jwtToken');
+        this.router.navigate(['/login']);
+      },
+      error: (err) => {
+        if (err.status === 200 || err.status === 204) {
+          localStorage.removeItem('jwtToken');
+          this.router.navigate(['/login']);
+        } else {
+          console.error('Error deleting candidate:', err);
+          alert('Failed to delete candidate. Check your password.');
+        }
+      },
+    });
+  }
 }
