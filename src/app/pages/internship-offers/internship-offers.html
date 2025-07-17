@@ -10,7 +10,7 @@
       [(ngModel)]="searchTerm"
       (ngModelChange)="onSearchTermChange()">
   </div>
-  <div class="row g-5 justify-content-center">
+  <div class="container__offers row g-5 justify-content-center">
     <div class="col-lg-3" *ngFor="let offer of filteredOffers">
       <div class="card h-100 shadow-lg border-0 custom-card position-relative overflow-hidden" style="background: #fff;">
         <img src="assets/images/IT.JPG" class="card-img-top" alt="Offer Image" style="height: 180px; object-fit: cover; border-radius: 0.75rem 0.75rem 0 0;">

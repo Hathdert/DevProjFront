@@ -15,7 +15,7 @@ export class AuthGuard implements CanActivate {
     if (token) {
       return true;
     } else {
-      alert('Você precisa estar logado para acessar essa página.');
+      // alert('Você precisa estar logado para acessar essa página.');
       this.router.navigate(['/login']);
       return false;
     }
