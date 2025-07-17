@@ -2,6 +2,7 @@ import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CandidateADM, CompanyADM, AdminService } from '../../services/admin.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-admin',
@@ -23,7 +24,7 @@ export class Admin implements OnInit {
   filteredCompanies: CompanyADM[] = [];
   emailFilterCompanies: string = '';
 
-  constructor(private adminService: AdminService) { }
+  constructor(private adminService: AdminService, private http: HttpClient) { }
 
   ngOnInit(): void {
     // Carregar candidatos
@@ -78,5 +79,31 @@ export class Admin implements OnInit {
   alert(`ID: ${id}`);
 }
 
+  approveCompany(companyId: number) {
+    this.http.put(`http://localhost:8080/api/companies/${companyId}/approval-status`, {
+      approvalStatus: 1
+    }).subscribe({
+      next: () => {
+        const company = this.filteredCompanies.find(c => c.id === companyId);
+        if (company) company.approvalStatus = 1;
+      },
+      error: () => {
+        alert('Erro ao aprovar empresa.');
+      }
+    });
+  }
 
+  rejectCompany(companyId: number) {
+    this.http.put(`http://localhost:8080/api/companies/${companyId}/approval-status`, {
+      approvalStatus: 2
+    }).subscribe({
+      next: () => {
+        const company = this.filteredCompanies.find(c => c.id === companyId);
+        if (company) company.approvalStatus = 2;
+      },
+      error: () => {
+        alert('Erro ao reprovar empresa.');
+      }
+    });
+  }
 }
