@@ -28,12 +28,12 @@ export class CompanyProfileComponent {
     private companyService: CompanyService,
     private documentService: DocumentService,
     private offerService: InternshipOfferService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.companyService.getCompanyById(this.id).subscribe({
       next: (data: Company) => {
-        
+
         this.company = data;
 
         this.documentService

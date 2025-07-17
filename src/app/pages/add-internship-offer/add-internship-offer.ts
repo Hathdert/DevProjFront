@@ -15,7 +15,7 @@ import { CompanyService } from '../../services/company.service';
 })
 export class AddInternshipOfferComponent {
     id: number = parseInt(window.location.pathname.split('/').pop() || '0', 10); //testar
-    companyId: number = 0; // novo campo para guardar o id da company
+    companyId: number = 0;
     today: string = new Date().toISOString().split('T')[0];
 
   offer: InternshipOfferCreate = {
@@ -34,14 +34,14 @@ export class AddInternshipOfferComponent {
 
   constructor(
     private offerService: InternshipOfferService,
-    private companyService: CompanyService, // injete aqui
+    private companyService: CompanyService, 
     private router: Router
   ) {
     // Busca o id da company ao iniciar o componente
     this.companyService.getCompanyByToken().subscribe({
       next: (company) => {
         this.companyId = company.id;
-        this.offer.company.id = company.id; // já preenche no objeto offer
+        this.offer.company.id = company.id; 
       },
       error: () => {
         this.companyId = 0;
@@ -66,7 +66,7 @@ export class AddInternshipOfferComponent {
       },
       error: err => {
         this.success = false;
-        this.error = 'Erro ao adicionar oferta';
+        this.error = 'Erro adding offer';
       }
     });
   }

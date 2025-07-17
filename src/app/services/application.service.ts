@@ -8,10 +8,10 @@ import { ApplicationCreate } from "../models/application-create.model";
   providedIn: 'root'
 })
 export class ApplicationService {
+  
   private apiUrl = 'http://localhost:8080/api/applications';
+
   private apiUrlUpdateState = 'http://localhost:8080/api/applications/{applicationId}/change-status';
-
-
 
   constructor(private http: HttpClient) { }
 

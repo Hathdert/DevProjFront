@@ -8,13 +8,14 @@ import { Company } from '../models/company.model';
 })
 export class CompanyService {
   private apiUrlToken = 'http://localhost:8080/api/companies/profile';
+
   private apiUrlId = 'http://localhost:8080/api/companies/{id}';
 
   constructor(private http: HttpClient) {}
 
   getCompanyByToken(): Observable<Company> {
     const token = localStorage.getItem('jwtToken');
-    if (!token) throw new Error('Token não encontrado no localStorage.');
+    if (!token) throw new Error('Token not found on localStorage.');
 
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`
@@ -30,7 +31,7 @@ export class CompanyService {
 
   editCompany(company: Company): Observable<Company> {
     const token = localStorage.getItem('jwtToken');
-    if (!token) throw new Error('Token não encontrado no localStorage.');
+    if (!token) throw new Error('Token not found on localStorage.');
 
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`

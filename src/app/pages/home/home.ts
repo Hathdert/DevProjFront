@@ -24,7 +24,7 @@ export class Home implements OnInit {
 
   constructor(
     private offerService: InternshipOfferService,
-    private homeService: HomeService // injete o HomeService
+    private homeService: HomeService 
   ) {}
 
   ngOnInit(): void {
@@ -37,7 +37,7 @@ export class Home implements OnInit {
       }
     });
 
-    // Buscar top 6 companies usando HomeService
+    // Search top 6 companies using HomeService
     this.homeService.getTop6Companies().subscribe({
       next: (data) => {
         this.topCompanies = data;

@@ -4,24 +4,19 @@
 
     <h2 class="my-5 text-center">Exportar .CSV's - Power BI</h2>
     <div class="d-flex justify-content-center gap-3 mb-4 flex-wrap">
-      <button class="btn custom-btn"
-        (click)="downloadCSV('http://localhost:8080/api/admin/candidates/csv', 'candidates.csv')">
+      <button class="btn custom-btn" (click)="downloadCSV('candidates', 'candidates.csv')">
         Candidate
       </button>
-      <button class="btn custom-btn"
-        (click)="downloadCSV('http://localhost:8080/api/admin/companies/csv', 'companies.csv')">
+      <button class="btn custom-btn" (click)="downloadCSV('companies', 'companies.csv')">
         Company
       </button>
-      <button class="btn custom-btn"
-        (click)="downloadCSV('http://localhost:8080/api/admin/applications/csv', 'applications.csv')">
+      <button class="btn custom-btn" (click)="downloadCSV('applications', 'applications.csv')">
         Applications
       </button>
-      <button class="btn custom-btn"
-        (click)="downloadCSV('http://localhost:8080/api/admin/documents/csv', 'documents.csv')">
+      <button class="btn custom-btn" (click)="downloadCSV('documents', 'documents.csv')">
         Documents
       </button>
-      <button class="btn custom-btn"
-        (click)="downloadCSV('http://localhost:8080/api/admin/internship-offers/csv', 'internship_offers.csv')">
+      <button class="btn custom-btn" (click)="downloadCSV('internshipOffers', 'internship_offers.csv')">
         Internshipoffers
       </button>
     </div>
@@ -42,7 +37,7 @@
             {{ candidate.registrationTime }}
           </p>
           <div class="text-center mt-3">
-<a href="#" class="btn btn-primary btn-sm" (click)="showDetails(candidate.id, $event)">Ver detalhes</a>
+            <a href="#" class="btn btn-primary btn-sm" (click)="showDetails(candidate.id, $event)">Ver detalhes</a>
           </div>
         </div>
       </div>
@@ -68,7 +63,7 @@
             {{ company.registrationTime }}
           </p>
           <div class="text-center mt-3">
-<a href="#" class="btn btn-primary btn-sm" (click)="showDetails(company.id, $event)">Ver detalhes</a>
+            <a href="#" class="btn btn-primary btn-sm" (click)="showDetails(company.id, $event)">Ver detalhes</a>
           </div>
         </div>
       </div>

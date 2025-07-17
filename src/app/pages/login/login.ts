@@ -32,7 +32,7 @@ export class LoginComponent {
         this.success = true;
         setTimeout(() => {
           this.router.navigate(['/home']);
-        }, 1500); // tempo igual ao da animação (2.5s)
+        }, 1500); 
       },
       error: () => {
         this.errorMessage = 'Usuário ou senha inválidos.';

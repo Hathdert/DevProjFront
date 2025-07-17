@@ -6,15 +6,15 @@ import { AuthService } from './auth';
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-  constructor(private auth: AuthService) {}
+  constructor(private auth: AuthService) { }
 
-  // Intercepta todas as requisições HTTP e depois adiciona o token ( para autenticar ).
+  //Intercepts all HTTP requests and adds the token (for authentication).
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const token = this.auth.getToken();
 
-    //Se existir token, adiciona o token no header, para autenticar.
+    //If a token exists, add the token to the header for authentication.
     if (token) {
-      //Clona a requisição e adiciona o token
+      //Clone the request and add the token
       const cloned = req.clone({
         headers: req.headers.set('Authorization', 'Bearer ' + token)
       });

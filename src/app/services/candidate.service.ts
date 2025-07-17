@@ -15,7 +15,7 @@ export class CandidateService {
     getCandidateByToken(): Observable<Candidate> {
         const token = localStorage.getItem('jwtToken');
         
-        if (!token) throw new Error('Token não encontrado no localStorage.');
+        if (!token) throw new Error('Token not found on localStorage.');
     
         const headers = new HttpHeaders({
         Authorization: `Bearer ${token}`
@@ -31,7 +31,7 @@ export class CandidateService {
 
   updateCandidate(candidate: Candidate): Observable<Candidate> {
     const token = localStorage.getItem('jwtToken');
-    if (!token) throw new Error('Token não encontrado no localStorage.');
+    if (!token) throw new Error('Token not found on localStorage.');
 
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`
@@ -42,7 +42,7 @@ export class CandidateService {
 
   checkEmailExists(email: string): Observable<boolean> {
     const token = localStorage.getItem('jwtToken');
-    if (!token) throw new Error('Token não encontrado no localStorage.');
+    if (!token) throw new Error('Token not found on localStorage.');
 
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`

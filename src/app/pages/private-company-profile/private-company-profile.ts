@@ -28,7 +28,7 @@ export class PrivateCompanyProfileComponent {
     private companyService: CompanyService,
     private documentService: DocumentService,
     private offerService: InternshipOfferService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.companyService.getCompanyByToken().subscribe({
@@ -104,6 +104,6 @@ export class PrivateCompanyProfileComponent {
       },
       error: () => alert('Failed to change offer status'),
     });
-    
+
   }
 }

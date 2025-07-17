@@ -10,6 +10,7 @@ import { CompanyOffer } from '../models/company-offer.model';
 })
 export class InternshipOfferService {
   private apiUrl = 'http://localhost:8080/api/internshipoffers';
+  
   private apiUrlfindByCompant = 'http://localhost:8080/api/internshipoffers/companies/{companyId}';
 
   private apiUrl2 = 'http://localhost:8080/api/internshipoffers/top6-by-applications';

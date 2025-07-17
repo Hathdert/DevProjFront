@@ -78,7 +78,7 @@ export class RegisterComponent {
     application: null as any,
   };
 
-  constructor(private router: Router, private http: HttpClient) {}
+  constructor(private router: Router, private http: HttpClient) { }
 
   companyForm: FormGroup = new FormGroup({
     name: new FormControl('', [

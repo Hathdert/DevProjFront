@@ -55,15 +55,9 @@ export class Admin implements OnInit {
     this.filteredCompanies = filter ? this.companies.filter(c => c.email.toLowerCase().includes(filter)) : this.companies;
   }
 
-  downloadCSV(endpoint: string, filename: string) {
-    fetch(endpoint)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Erro ao baixar o CSV');
-        }
-        return response.blob();
-      })
-      .then(blob => {
+  downloadCSV(type: string, filename: string) {
+    this.adminService.downloadCSV(type as any).subscribe({
+      next: (blob) => {
         const url = window.URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
@@ -72,11 +66,11 @@ export class Admin implements OnInit {
         a.click();
         a.remove();
         window.URL.revokeObjectURL(url);
-      })
-      .catch(error => {
-        console.error('Erro:', error);
-        alert('Falha ao baixar o arquivo.');
-      });
+      },
+      error: () => {
+        alert('Failed to download CSV.');
+      }
+    });
   }
 
   showDetails(id: number | string, event: Event) {
