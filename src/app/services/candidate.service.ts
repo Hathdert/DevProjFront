@@ -23,20 +23,6 @@ export class CandidateService {
     
         return this.http.get<Candidate>(this.apiUrlToken, { headers });
     }
-    getCandidateById(id: number): Observable<Candidate> {
-        const url = this.apiUrlId.replace('{id}', id.toString());
-        return this.http.get<Candidate>(url);
-    }
-
-    if (!token) throw new Error('Token não encontrado no localStorage.');
-
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`,
-    });
-
-    return this.http.get<Candidate>(this.apiUrlToken, { headers });
-  }
-
   deleteCandidateByToken(password: string): Observable<any> {
     const token = localStorage.getItem('jwtToken');
     if (!token) throw new Error('Token não encontrado no localStorage.');
