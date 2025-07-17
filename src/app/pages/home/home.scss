@@ -163,12 +163,18 @@ h2.display-6 {
   border-radius: 1rem;
   box-shadow: 0 0.5rem 1rem rgba(44,62,80,0.15);
   padding: 1rem 1.5rem;
-  margin-bottom: 40px; 
+  margin-bottom: 0; // para não empurrar o clippy
   margin-right: 10px;
   font-size: 1.1rem;
   color: #2C3E50;
-  border: 2px solid #C0392B;
   position: relative;
+  width: 320px; // tamanho fixo do balão
+  min-height: 48px; // altura mínima para o balão
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: hidden;
+  word-break: break-word;
 }
 
 .clippy-balloon:after {

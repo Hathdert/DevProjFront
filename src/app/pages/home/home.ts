@@ -22,6 +22,17 @@ export class Home implements OnInit {
   topCompanies: Company[] = [];
   showAll = false;
 
+  clippyPhrases: string[] = [
+    'Welcome to SkillBridge!',
+    'Find your dream internship here!',
+    'Check out the top companies!',
+    'Need help? Contact us!',
+    'Explore new opportunities!',
+    'Apply now and boost your career!'
+  ];
+  currentClippyPhrase: string = this.clippyPhrases[0];
+  private clippyInterval: any;
+
   constructor(
     private offerService: InternshipOfferService,
     private homeService: HomeService 
@@ -46,5 +57,18 @@ export class Home implements OnInit {
         console.error('Erro ao buscar empresas:', err);
       }
     });
+
+    // Clippy phrase rotation
+    let idx = 0;
+    this.clippyInterval = setInterval(() => {
+      idx = (idx + 1) % this.clippyPhrases.length;
+      this.currentClippyPhrase = this.clippyPhrases[idx];
+    }, 5000);
+  }
+
+  ngOnDestroy(): void {
+    if (this.clippyInterval) {
+      clearInterval(this.clippyInterval);
+    }
   }
 }
