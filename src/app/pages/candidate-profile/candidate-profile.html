@@ -138,7 +138,7 @@
                 <strong>End Date:</strong>
                 {{ app.internshipOffer?.endDate | date }}
               </p>
-
+                <div class="container__card">
               <span *ngIf="app.state === 0" class="badge bg-warning text-dark"
                 >Pending</span
               >
@@ -148,6 +148,16 @@
               <span *ngIf="app.state === 2" class="badge bg-danger"
                 >Rejected</span
               >
+
+                  <button
+                *ngIf="!isEditing"
+                class="btn btn-outline-danger"
+                (click)="deletarAplicacaoUnica(app.id)"
+              >
+                Cancel Application
+              </button>
+              </div>
+
             </div>
           </div>
         </div>

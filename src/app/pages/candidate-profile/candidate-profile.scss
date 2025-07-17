@@ -1,6 +1,12 @@
-#container-cadidate{
-    margin-left: 5%;
+#container-cadidate {
+  margin-left: 5%;
 }
-.container__application{
-    margin-top: 5%;
+.container__application {
+  margin-top: 5%;
+}
+
+.container__card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

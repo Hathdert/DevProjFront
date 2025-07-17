@@ -51,4 +51,9 @@ export class ApplicationService {
   getOfferByApplicationId(applicationId: number): Observable<any> {
     return this.http.get<any>(`${this.apiUrlGetOffer}/${applicationId}`);
   }
+
+  deleteApplicationById(applicationId: number): Observable<void> {
+  return this.http.delete<void>(`http://localhost:8080/api/applications/deleteapp/${applicationId}`);
+}
+
 }
