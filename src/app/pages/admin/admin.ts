@@ -13,6 +13,7 @@ import { HttpClient } from '@angular/common/http';
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class Admin implements OnInit {
+  activeTab: 'candidates' | 'companies' = 'candidates';
 
   // CANDIDATES
   candidates: CandidateADM[] = [];
