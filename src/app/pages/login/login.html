@@ -8,45 +8,25 @@
           <form #loginForm="ngForm" (ngSubmit)="onSubmit()" class="needs-validation" novalidate>
             <div class="mb-3">
               <label for="username" class="form-label">Usuário</label>
-              <input
-                type="email"
-                id="username"
-                name="username"
-                [(ngModel)]="username"
-                class="form-control"
-                placeholder="Insert email"
-                required
-                #usernameInput="ngModel"
-                [class.is-invalid]="usernameInput.invalid && usernameInput.touched"
-              />
+              <input type="email" id="username" name="username" [(ngModel)]="username" class="form-control"
+                placeholder="Insert email" required #usernameInput="ngModel"
+                [class.is-invalid]="usernameInput.invalid && usernameInput.touched" />
               <div class="invalid-feedback" *ngIf="usernameInput.invalid && usernameInput.touched">
                 Please enter a valid email.
               </div>
             </div>
             <div class="mb-3">
               <label for="password" class="form-label">Senha</label>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                [(ngModel)]="password"
-                class="form-control"
-                placeholder="Insert password"
-                required
-                #passwordInput="ngModel"
-                [class.is-invalid]="passwordInput.invalid && passwordInput.touched"
-              />
+              <input type="password" id="password" name="password" [(ngModel)]="password" class="form-control"
+                placeholder="Insert password" required #passwordInput="ngModel"
+                [class.is-invalid]="passwordInput.invalid && passwordInput.touched" />
               <div class="invalid-feedback" *ngIf="passwordInput.invalid && passwordInput.touched">
                 Password is required.
               </div>
             </div>
             <div class="text-center">
-              <button
-                type="submit"
-                class="btn"
-                style="background-color: #C0392B; color: white;"
-                [disabled]="loginForm.invalid"
-              >
+              <button type="submit" class="btn" style="background-color: #C0392B; color: white;"
+                [disabled]="loginForm.invalid">
                 Entrar
               </button>
             </div>

@@ -9,13 +9,14 @@ import { LoginComponent } from '../pages/login/login';
 })
 export class CompanyService {
   private apiUrlToken = 'http://localhost:8080/api/companies/profile';
+
   private apiUrlId = 'http://localhost:8080/api/companies/{id}';
 
   constructor(private http: HttpClient) {}
 
   getCompanyByToken(): Observable<Company> {
     const token = localStorage.getItem('jwtToken');
-    if (!token) throw new Error('Token não encontrado no localStorage.');
+    if (!token) throw new Error('Token not found on localStorage.');
 
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`
@@ -46,7 +47,7 @@ deleteCompanyByToken(password: string): Observable<any> {
 
   editCompany(company: Company): Observable<Company> {
     const token = localStorage.getItem('jwtToken');
-    if (!token) throw new Error('Token não encontrado no localStorage.');
+    if (!token) throw new Error('Token not found on localStorage.');
 
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`

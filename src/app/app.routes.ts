@@ -18,7 +18,8 @@ import { FaqComponent } from './pages/faq/faq';
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'home', component: Home, canActivate: [AuthGuard] },
+  { path: 'home', component: Home},
+  //, canActivate: [AuthGuard] 
   { path: 'profile-company', component: PrivateCompanyProfileComponent },
   { path: 'company/:id', component: CompanyProfileComponent},
   { path : 'profile-candidate', component:CandidateProfile},

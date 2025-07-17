@@ -8,6 +8,7 @@ import { Company } from '../models/company.model';
 })
 export class DocumentService {
   private apiUrlCompanyFirstImage = 'http://localhost:8080/api/documents/company/{companyId}/first-image';
+  
   private apiUrlCandidateFirstImage = 'http://localhost:8080/api/documents/candidate/{candidateId}/first-image';
 
   constructor(private http: HttpClient) {}

@@ -24,7 +24,7 @@ export class CandidateProfile {
     private router: Router,
     private candidateService: CandidateService,
     private documentService: DocumentService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.candidateService.getCandidateByToken().subscribe({
@@ -34,11 +34,11 @@ export class CandidateProfile {
           .getCandidateFirstImage(this.candidate.id)
           .subscribe((blob) => {
             this.candidateImageUrl = URL.createObjectURL(blob);
-            console.log('URL da imagem do candidato:', this.candidateImageUrl);
+            console.log('URL image candidate:', this.candidateImageUrl);
           });
       },
       error: (err) => {
-        console.error('Erro ao buscar perfil do candidato:', err);
+        console.error('Erro searching candidate profile:', err);
       },
     });
   }
@@ -63,10 +63,10 @@ export class CandidateProfile {
       next: (updatedCandidate: Candidate) => {
         this.candidate = updatedCandidate;
         this.isEditing = false;
-        console.log('Perfil do candidato atualizado com sucesso');
+        console.log('Perfil updated');
       },
       error: (err) => {
-        console.error('Erro ao atualizar perfil do candidato:', err);
+        console.error('Erro updating profile:', err);
       },
     });
   }

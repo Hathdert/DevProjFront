@@ -40,7 +40,7 @@ body {
   transition: transform 0.3s, box-shadow 0.3s;
   background: #fff;
   border: none;
-  min-height: 420px; // ajuste conforme necessário para igualar os cards
+  min-height: 420px;
   display: flex;
   flex-direction: column;
 }
@@ -100,23 +100,23 @@ body {
 }
 
 .card-wrapper {
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE 10+ */
+  scrollbar-width: none; 
+  -ms-overflow-style: none; 
 
   &::-webkit-scrollbar {
-    display: none; /* Chrome, Safari e Edge */
+    display: none; 
   }
 }
 
 /* Espaço extra entre título e cards */
 .container.mt-5 > .row {
-  margin-top: 2.5rem; // aumenta o espaço entre título e cards
+  margin-top: 2.5rem; 
 }
 
 /* Espaço extra entre os cards */
 .row.g-4, .row.g-5 {
-  row-gap: 2rem; // aumenta o espaço vertical entre cards
-  column-gap: 2rem; // aumenta o espaço horizontal entre cards
+  row-gap: 2rem; 
+  column-gap: 2rem; 
 }
 
 /* Opcional: mais espaço abaixo do título */
@@ -150,7 +150,7 @@ h2.display-6 {
   right: 30px;
   z-index: 9999;
   display: flex;
-  align-items: flex-start; // faz o balão subir em relação ao clippy
+  align-items: flex-start; 
 }
 
 .clippy-img {
@@ -163,12 +163,18 @@ h2.display-6 {
   border-radius: 1rem;
   box-shadow: 0 0.5rem 1rem rgba(44,62,80,0.15);
   padding: 1rem 1.5rem;
-  margin-bottom: 40px; // aumenta a distância do balão para baixo
+  margin-bottom: 0; // para não empurrar o clippy
   margin-right: 10px;
   font-size: 1.1rem;
   color: #2C3E50;
-  border: 2px solid #C0392B;
   position: relative;
+  width: 320px; // tamanho fixo do balão
+  min-height: 48px; // altura mínima para o balão
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: hidden;
+  word-break: break-word;
 }
 
 .clippy-balloon:after {

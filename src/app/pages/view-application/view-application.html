@@ -35,6 +35,12 @@
             <div class="offer-panel flex-grow-1 d-flex flex-column justify-content-center">
               <h4 class="fw-bold mb-3" style="color: #C0392B;">Pitch</h4>
               <p class="mb-4 fs-5 text-muted">{{ application.pitch }}</p>
+              <button
+                class="btn btn-primary btn-lg rounded-pill fw-bold mb-4"
+                style="min-width: 140px;"
+                (click)="downloadCV(application.id)">
+                Download CV
+              </button>
               <h5 class="fw-bold mb-2" style="color: #2C3E50;">State</h5>
               <p *ngIf="application.state === 0" class="badge bg-warning text-dark state-bar">Pending</p>
               <p *ngIf="application.state === 1" class="badge bg-success state-bar">Accepted</p>

@@ -1,5 +1,3 @@
-// src/app/app.ts
-
 import { Component } from '@angular/core';
 import {
   Router,

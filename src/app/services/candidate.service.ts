@@ -12,8 +12,21 @@ export class CandidateService {
 
   constructor(private http: HttpClient) {}
 
-  getCandidateByToken(): Observable<Candidate> {
-    const token = localStorage.getItem('jwtToken');
+    getCandidateByToken(): Observable<Candidate> {
+        const token = localStorage.getItem('jwtToken');
+        
+        if (!token) throw new Error('Token not found on localStorage.');
+    
+        const headers = new HttpHeaders({
+        Authorization: `Bearer ${token}`
+        });
+    
+        return this.http.get<Candidate>(this.apiUrlToken, { headers });
+    }
+    getCandidateById(id: number): Observable<Candidate> {
+        const url = this.apiUrlId.replace('{id}', id.toString());
+        return this.http.get<Candidate>(url);
+    }
 
     if (!token) throw new Error('Token não encontrado no localStorage.');
 
@@ -45,7 +58,7 @@ export class CandidateService {
 
   updateCandidate(candidate: Candidate): Observable<Candidate> {
     const token = localStorage.getItem('jwtToken');
-    if (!token) throw new Error('Token não encontrado no localStorage.');
+    if (!token) throw new Error('Token not found on localStorage.');
 
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
@@ -56,7 +69,7 @@ export class CandidateService {
 
   checkEmailExists(email: string): Observable<boolean> {
     const token = localStorage.getItem('jwtToken');
-    if (!token) throw new Error('Token não encontrado no localStorage.');
+    if (!token) throw new Error('Token not found on localStorage.');
 
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,

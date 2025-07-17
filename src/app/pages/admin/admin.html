@@ -1,77 +1,109 @@
-<div class="container py-4">
-  <div class="card admin-container p-4">
-    <h2 class="my-5 text-center admin-title">ADMIN AREA</h2>
+<div class="site-wrap">
 
-    <h2 class="my-5 text-center">Exportar .CSV's - Power BI</h2>
-    <div class="d-flex justify-content-center gap-3 mb-4 flex-wrap">
-      <button class="btn custom-btn"
-        (click)="downloadCSV('http://localhost:8080/api/admin/candidates/csv', 'candidates.csv')">
-        Candidate
-      </button>
-      <button class="btn custom-btn"
-        (click)="downloadCSV('http://localhost:8080/api/admin/companies/csv', 'companies.csv')">
-        Company
-      </button>
-      <button class="btn custom-btn"
-        (click)="downloadCSV('http://localhost:8080/api/admin/applications/csv', 'applications.csv')">
-        Applications
-      </button>
-      <button class="btn custom-btn"
-        (click)="downloadCSV('http://localhost:8080/api/admin/documents/csv', 'documents.csv')">
-        Documents
-      </button>
-      <button class="btn custom-btn"
-        (click)="downloadCSV('http://localhost:8080/api/admin/internship-offers/csv', 'internship_offers.csv')">
-        Internshipoffers
-      </button>
+  <nav class="site-nav">
+    <div class="name">
+      SkillBridge
+      <svg width="24" height="24" viewBox="0 0 24 24">
+        <path d="M11.5,22C11.64,22 11.77,22 11.9,21.96C12.55,21.82 13.09,21.38 13.34,20.78C13.44,20.54 13.5,20.27 13.5,20H9.5A2,2 0 0,0 11.5,22M18,10.5C18,7.43 15.86,4.86 13,4.18V3.5A1.5,1.5 0 0,0 11.5,2A1.5,1.5 0 0,0 10,3.5V4.18C7.13,4.86 5,7.43 5,10.5V16L3,18V19H20V18L18,16M19.97,10H21.97C21.82,6.79 20.24,3.97 17.85,2.15L16.42,3.58C18.46,5 19.82,7.35 19.97,10M6.58,3.58L5.15,2.15C2.76,3.97 1.18,6.79 1,10H3C3.18,7.35 4.54,5 6.58,3.58Z"></path>
+      </svg>
     </div>
+    <ul>
+      <li class="active"><a href="#">Dashboard</a></li>
+      <li>
+        <a href="#">Export CSVs</a>
+        <ul>
+          <li><button class="btn custom-btn w-100 text-start" (click)="downloadCSV('candidates', 'candidates.csv')">Candidate</button></li>
+          <li><button class="btn custom-btn w-100 text-start" (click)="downloadCSV('companies', 'companies.csv')">Company</button></li>
+          <li><button class="btn custom-btn w-100 text-start" (click)="downloadCSV('applications', 'applications.csv')">Applications</button></li>
+          <li><button class="btn custom-btn w-100 text-start" (click)="downloadCSV('documents', 'documents.csv')">Documents</button></li>
+          <li><button class="btn custom-btn w-100 text-start" (click)="downloadCSV('internshipOffers', 'internship_offers.csv')">Internship Offers</button></li>
+        </ul>
+      </li>
+    </ul>
+    <div class="note">
+      <h3>Your Monthly Report</h3>
+      <p>Get the info about all your deals, pros, cons. And build your roadmap.</p>
+    </div>
+  </nav>
 
-    <h2 class="my-5 text-center">Candidatos</h2>
-    <input type="text" class="form-control mb-4" placeholder="Filtrar candidatos por email"
-      [(ngModel)]="emailFilterCandidates" (ngModelChange)="filterCandidates()" />
-    <div style="display: flex; gap: 1rem; overflow-x: auto; max-width: 100%; padding-bottom: 1rem;">
-      <div class="card flex-shrink-0" style="min-width: 250px;" *ngFor="let candidate of filteredCandidates">
-        <div class="card-body">
-          <h5 class="card-title">{{ candidate.name }}</h5>
-          <p class="mb-1"><strong>Email:</strong> {{ candidate.email }}</p>
-          <p class="mb-1"><strong>Telefone:</strong> {{ candidate.phone }}</p>
-          <p class="mb-1"><strong>Endereço:</strong> {{ candidate.address }}</p>
-          <p class="mb-1"><strong>Data de Nascimento:</strong> {{ candidate.birthDate | date: 'dd/MM/yyyy' }}</p>
-          <p class="mb-1">
-            <strong>Registrado em:</strong> {{ candidate.registrationDate | date: 'dd/MM/yyyy' }} às
-            {{ candidate.registrationTime }}
-          </p>
-          <div class="text-center mt-3">
-<a href="#" class="btn btn-primary btn-sm" (click)="showDetails(candidate.id, $event)">Ver detalhes</a>
+  <main>
+    <header>
+      <div class="breadcrumbs"></div>
+      <h1 class="title">ADMIN DASHBOARD</h1>
+      <nav class="nav-tabs" id="nav-tabs">
+        <a href="#" [class.active]="activeTab === 'candidates'" (click)="activeTab = 'candidates'; $event.preventDefault();">
+          Candidates
+        </a>
+        <a href="#" [class.active]="activeTab === 'companies'" (click)="activeTab = 'companies'; $event.preventDefault();">
+          Companies
+        </a>
+      </nav>
+    </header>
+
+    <div class="container py-4">
+
+      <div *ngIf="activeTab === 'candidates'">
+        <input type="text" class="form-control mb-4" placeholder="Filter candidates by email"
+          [(ngModel)]="emailFilterCandidates" (ngModelChange)="filterCandidates()" />
+        <div style="display: flex; gap: 1rem; overflow-x: auto; max-width: 100%; padding-bottom: 1rem;">
+          <div class="card flex-shrink-0" style="min-width: 250px;" *ngFor="let candidate of filteredCandidates">
+            <div class="card-body">
+              <h5 class="card-title">{{ candidate.name }}</h5>
+              <p class="mb-1"><strong>Email:</strong> {{ candidate.email }}</p>
+              <p class="mb-1"><strong>Phone:</strong> {{ candidate.phone }}</p>
+              <p class="mb-1"><strong>Address:</strong> {{ candidate.address }}</p>
+              <p class="mb-1"><strong>Date of Birth:</strong> {{ candidate.birthDate | date: 'MM/dd/yyyy' }}</p>
+              <p class="mb-1">
+                <strong>Registered on:</strong> {{ candidate.registrationDate | date: 'MM/dd/yyyy' }} at
+                {{ candidate.registrationTime }}
+              </p>
+              <div class="text-center mt-3">
+                <a href="#" class="btn btn-primary btn-sm" (click)="showDetails(candidate.id, $event)">View details</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="activeTab === 'companies'">
+        <input type="text" class="form-control mb-4" placeholder="Filter companies by email"
+          [(ngModel)]="emailFilterCompanies" (ngModelChange)="filterCompanies()" />
+        <div style="display: flex; gap: 1rem; overflow-x: auto; max-width: 100%; padding-bottom: 1rem;">
+          <div class="card flex-shrink-0" style="min-width: 250px;" *ngFor="let company of filteredCompanies">
+            <div class="card-body">
+              <h5 class="card-title">{{ company.name }}</h5>
+              <p class="mb-1"><strong>Email:</strong> {{ company.email }}</p>
+              <p class="mb-1"><strong>Phone:</strong> {{ company.phone }}</p>
+              <p class="mb-1"><strong>Address:</strong> {{ company.address }}</p>
+              <p class="mb-1"><strong>Description:</strong> {{ company.description }}</p>
+              <p class="mb-1"><strong>Area:</strong> {{ company.area }}</p>
+              <p class="mb-1"><strong>NIPC:</strong> {{ company.nipc }}</p>
+              <p class="mb-1"><strong>Approval Status:</strong> {{ company.approvalStatus }}</p>
+              <p class="mb-1">
+                <strong>Registered on:</strong> {{ company.registrationDate | date: 'MM/dd/yyyy' }} at
+                {{ company.registrationTime }}
+              </p>
+              <div class="text-center mt-3">
+                <a href="#" class="btn btn-primary btn-sm" (click)="showDetails(company.id, $event)">View details</a>
+              </div>
+              <div class="text-center mt-3">
+                <button
+                  *ngIf="company.approvalStatus === 0"
+                  class="btn btn-success btn-sm me-2"
+                  (click)="approveCompany(company.id)">
+                  Approve
+                </button>
+                <button
+                  *ngIf="company.approvalStatus === 0"
+                  class="btn btn-danger btn-sm"
+                  (click)="rejectCompany(company.id)">
+                  Reject
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-
-    <!-- COMPANIES -->
-    <h2 class="my-5 text-center">Empresas</h2>
-    <input type="text" class="form-control mb-4" placeholder="Filtrar empresas por email"
-      [(ngModel)]="emailFilterCompanies" (ngModelChange)="filterCompanies()" />
-    <div style="display: flex; gap: 1rem; overflow-x: auto; max-width: 100%; padding-bottom: 1rem;">
-      <div class="card flex-shrink-0" style="min-width: 250px;" *ngFor="let company of filteredCompanies">
-        <div class="card-body">
-          <h5 class="card-title">{{ company.name }}</h5>
-          <p class="mb-1"><strong>Email:</strong> {{ company.email }}</p>
-          <p class="mb-1"><strong>Telefone:</strong> {{ company.phone }}</p>
-          <p class="mb-1"><strong>Endereço:</strong> {{ company.address }}</p>
-          <p class="mb-1"><strong>Descrição:</strong> {{ company.description }}</p>
-          <p class="mb-1"><strong>Área:</strong> {{ company.area }}</p>
-          <p class="mb-1"><strong>NIPC:</strong> {{ company.nipc }}</p>
-          <p class="mb-1"><strong>Status de aprovação:</strong> {{ company.approvalStatus }}</p>
-          <p class="mb-1">
-            <strong>Registrado em:</strong> {{ company.registrationDate | date: 'dd/MM/yyyy' }} às
-            {{ company.registrationTime }}
-          </p>
-          <div class="text-center mt-3">
-<a href="#" class="btn btn-primary btn-sm" (click)="showDetails(company.id, $event)">Ver detalhes</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  </main>
 </div>

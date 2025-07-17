@@ -80,19 +80,19 @@ ngOnInit(): void {
       this.offer = data;
       this.applications = this.offer.applications || [];
 
-      // Para cada application, busca os detalhes do candidato usando candidateId
+      // For each application, fetch candidate details using candidateId
       this.applications.forEach((app, idx) => {
         if (app.candidateId) {
           this.candidateService.getCandidateById(app.candidateId).subscribe({
             next: (candidate) => {
               this.applications[idx].candidate = candidate;
             },
-            error: (err) => console.error('Erro ao buscar candidato:', err)
+            error: (err) => console.error('Erro searching candidate:', err)
           });
         }
       });
     },
-    error: (err) => console.error('Erro ao buscar oferta:', err)
+    error: (err) => console.error('Erro searching offer:', err)
   });
 }
   goBack() {

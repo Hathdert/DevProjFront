@@ -14,7 +14,7 @@ body {
     0 12px 32px 0 rgba(44,62,80,0.38),
     0 2rem 4rem rgba(44,62,80,0.22),
     0 0.5rem 1rem rgba(44,62,80,0.12);
-  border: 4px solid #C0392B; // borda com cor C0392B
+  border: 4px solid #C0392B; 
   min-height: 500px;
   display: flex;
   flex-direction: column;
@@ -114,5 +114,5 @@ body {
 }
 
 .slide-out {
-  animation: slideOutUp 1.5s forwards;
+  animation: slideOutUp 0.2s forwards;
 }
