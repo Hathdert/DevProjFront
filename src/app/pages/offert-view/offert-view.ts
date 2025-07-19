@@ -112,7 +112,15 @@ export class OffertView {
   }
 
   submitApplication() {
-    console.log('OfferID', this.offer?.id);
+      if (!this.offer) {
+    this.error = 'A oferta não está carregada ainda!';
+    console.error('Offer is undefined or null.');
+    return;
+  }
+
+  this.application.internshipOffer.id = this.offer.id;
+    console.log("asddasds", this.offer);
+    
     console.log('Submitting application:', this.application);
     this.applicationService.createApplication(this.application).subscribe({
       next: (createdApp) => {
