@@ -44,7 +44,7 @@ export class Home implements OnInit {
         this.offers = data;
       },
       error: (err) => {
-        console.error('Erro ao buscar ofertas:', err);
+        console.error('Error finding offers:', err);
       }
     });
 
@@ -54,7 +54,7 @@ export class Home implements OnInit {
         this.topCompanies = data;
       },
       error: (err) => {
-        console.error('Erro ao buscar empresas:', err);
+        console.error('Error finding company:', err);
       }
     });
 

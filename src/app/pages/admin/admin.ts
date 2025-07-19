@@ -28,22 +28,20 @@ export class Admin implements OnInit {
   constructor(private adminService: AdminService, private http: HttpClient) { }
 
   ngOnInit(): void {
-    // Carregar candidatos
     this.adminService.getCandidates().subscribe({
       next: data => {
         this.candidates = data;
         this.filteredCandidates = data;
       },
-      error: err => console.error('Erro ao carregar candidatos:', err)
+      error: err => console.error('Error finding candidates:', err)
     });
 
-    // Carregar empresas
     this.adminService.getCompanies().subscribe({
       next: data => {
         this.companies = data;
         this.filteredCompanies = data;
       },
-      error: err => console.error('Erro ao carregar empresas:', err)
+      error: err => console.error('Error loading company:', err)
     });
   }
 
@@ -89,7 +87,8 @@ export class Admin implements OnInit {
         if (company) company.approvalStatus = 1;
       },
       error: () => {
-        alert('Erro ao aprovar empresa.');
+        
+        alert('Error approving company');
       }
     });
   }
@@ -103,7 +102,7 @@ export class Admin implements OnInit {
         if (company) company.approvalStatus = 2;
       },
       error: () => {
-        alert('Erro ao reprovar empresa.');
+        alert('Error rejecting company');
       }
     });
   }

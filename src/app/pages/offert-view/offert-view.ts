@@ -62,17 +62,17 @@ export class OffertView {
         this.offer = data;
         this.offerService.getCompanyByOfferId(id).subscribe({
           next: (companyData) => (this.company = companyData),
-          error: (err) => console.error('Erro ao buscar empresa:', err),
+          error: (err) => console.error('Error finding company:', err),
         });
       },
-      error: (err) => console.error('Erro ao buscar oferta:', err),
+      error: (err) => console.error('Error finding offers:', err),
     });
     this.candidateService.getCandidateByToken().subscribe({
       next: (candidate) => {
         this.application.candidate.id = candidate.id;
         this.application.internshipOffer.id = this.offer?.id || 0;
       },
-      error: (err) => console.error('Erro ao buscar candidato:', err),
+      error: (err) => console.error('Error finding candidate:', err),
     });
     const token = localStorage.getItem('jwtToken');
     if (token) {
@@ -113,13 +113,12 @@ export class OffertView {
 
   submitApplication() {
       if (!this.offer) {
-    this.error = 'A oferta não está carregada ainda!';
+    this.error = 'Offer is undefined or null.';
     console.error('Offer is undefined or null.');
     return;
   }
 
   this.application.internshipOffer.id = this.offer.id;
-    console.log("asddasds", this.offer);
     
     console.log('Submitting application:', this.application);
     this.applicationService.createApplication(this.application).subscribe({

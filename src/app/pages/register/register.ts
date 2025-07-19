@@ -177,12 +177,11 @@ export class RegisterComponent {
             if (err.status === 409 && err.error) {
               let errorMsg = 'Erro desconhecido';
 
-              // Tenta fazer o parse da string JSON
               try {
                 const errorObj = JSON.parse(err.error);
                 errorMsg = errorObj.message || errorMsg;
               } catch {
-                errorMsg = err.error; // se não for JSON, usa direto
+                errorMsg = err.error; 
               }
 
               this.setServerFieldError(this.companyForm, 'email', errorMsg);
@@ -214,9 +213,8 @@ export class RegisterComponent {
           error: (err) => {
             console.error('Registration error:', err);
             if (err.status === 409 && err.error) {
-              let errorMsg = 'Erro desconhecido';
+              let errorMsg = 'Error';
 
-              // Tenta fazer o parse da string JSON
               try {
                 const errorObj = JSON.parse(err.error);
                 console.log('Error object:', errorObj);

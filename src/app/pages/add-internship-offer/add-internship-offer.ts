@@ -14,7 +14,7 @@ import { CompanyService } from '../../services/company.service';
   
 })
 export class AddInternshipOfferComponent {
-    id: number = parseInt(window.location.pathname.split('/').pop() || '0', 10); //testar
+    id: number = parseInt(window.location.pathname.split('/').pop() || '0', 10); 
     companyId: number = 0;
     today: string = new Date().toISOString().split('T')[0];
 
@@ -37,7 +37,6 @@ export class AddInternshipOfferComponent {
     private companyService: CompanyService, 
     private router: Router
   ) {
-    // Busca o id da company ao iniciar o componente
     this.companyService.getCompanyByToken().subscribe({
       next: (company) => {
         this.companyId = company.id;

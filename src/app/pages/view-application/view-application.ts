@@ -30,17 +30,15 @@ export class ViewApplication implements OnInit {
   ngOnInit(): void {
 
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    // Busca application
     this.http.get(`http://localhost:8080/api/applications/${id}`).subscribe({
       next: (data) => {
         this.application = data;
-        // Busca candidate usando o endpoint novo
         this.http.get(`http://localhost:8080/api/applications/${id}/candidate`).subscribe({
           next: (cand) => this.candidate = cand,
-          error: (err) => console.error('Erro ao buscar candidate:', err)
+          error: (err) => console.error('Error finding candidate:', err)
         });
       },
-      error: (err) => console.error('Erro ao buscar application:', err)
+      error: (err) => console.error('Error finding application:', err)
     });
   }
 
@@ -67,7 +65,7 @@ export class ViewApplication implements OnInit {
         a.remove();
         window.URL.revokeObjectURL(url);
       },
-      error: () => alert('Erro ao baixar o arquivo.')
+      error: () => alert('Error downloading the file.')
     });
   }
 }

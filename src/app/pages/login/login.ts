@@ -35,8 +35,7 @@ export class LoginComponent {
         }, 1500); 
       },
       error: () => {
-        this.errorMessage = 'Usuário ou senha inválidos.';
-        alert(this.errorMessage);
+        this.errorMessage = 'Invalid user or not allowed.';
       }
     });
   }

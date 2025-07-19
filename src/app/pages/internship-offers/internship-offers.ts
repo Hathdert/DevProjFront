@@ -28,7 +28,7 @@ export class InternshipOffers {
         this.updateFilteredOffers();
       },
       error: (err) => {
-        console.error('Error searching ofertas:', err);
+        console.error('Error finding offers:', err);
       }
     });
   }

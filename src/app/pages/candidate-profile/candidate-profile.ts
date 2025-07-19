@@ -72,18 +72,18 @@ export class CandidateProfile {
                     app.internshipOffer = offerById;
                   },
                   error: (err) => {
-                    console.error('Erro ao buscar oferta via Offer ID:', err);
+                    console.error('Erro finding offer via offerid :', err);
                   },
                 });
               },
               error: (err) => {
-                console.error('Erro ao buscar oferta via Application ID:', err);
+                console.error('Error finding offer via Application ID:', err);
               },
             });
           });
         },
         error: (err) => {
-          console.error('Erro ao buscar candidaturas:', err);
+          console.error('Error  finding applications', err);
         },
       });
   }
@@ -113,19 +113,18 @@ export class CandidateProfile {
 
       Swal.fire({
         icon: 'success',
-        title: 'Perfil atualizado!',
-        text: 'As informações do candidato foram salvas com sucesso.',
+        title: 'Profile updated!',
+        text: 'Information saved success.',
         timer: 2000,
         showConfirmButton: false
       });
     },
     error: (err) => {
-      console.error('Erro ao atualizar perfil do candidato:', err);
 
       Swal.fire({
         icon: 'error',
-        title: 'Erro ao salvar',
-        text: 'Ocorreu um erro ao atualizar o perfil. Tente novamente.',
+        title: 'Error to save',
+        text: 'Error occured during update. Try again.',
       });
     },
   });
