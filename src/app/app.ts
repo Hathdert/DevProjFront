@@ -63,12 +63,13 @@ export class App {
 
   logout() {
   Swal.fire({
-    title: 'Deseja realmente sair?',
-    text: 'Você será desconectado do sistema.',
+    title: 'Do you really want to log out?',
+    text: 'You will be disconnected from the system.',
     icon: 'warning',
     showCancelButton: true,
-    confirmButtonText: 'Sim, sair',
-    cancelButtonText: 'Cancelar',
+    confirmButtonText: 'Yes, log out',
+    cancelButtonText: 'Cancel',
+    confirmButtonColor: '#d33',
     
   }).then((result) => {
     if (result.isConfirmed) {
@@ -77,8 +78,8 @@ export class App {
 
       Swal.fire({
         icon: 'success',
-        title: 'Desconectado',
-        text: 'Você saiu com sucesso.',
+        title: 'Logged out',
+        text: 'You have successfully logged out.',
         timer: 1500,
         showConfirmButton: false
       });

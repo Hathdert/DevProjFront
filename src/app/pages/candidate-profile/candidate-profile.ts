@@ -151,12 +151,13 @@ export class CandidateProfile {
 
   deletarAplicacaoUnica(applicationId: number): void {
     Swal.fire({
-      title: 'Tem certeza?',
-      text: 'Essa ação vai deletar todas as aplicações do candidato!',
+      title: 'Are you sure?',
+      text: 'This will delete the application!',
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonText: 'Sim, deletar',
-      cancelButtonText: 'Cancelar',
+      confirmButtonText: 'Yes, delete',
+      cancelButtonText: 'No',
+      confirmButtonColor: '#d33',
     }).then((result) => {
       if (result.isConfirmed) {
         this.applicationService
@@ -164,17 +165,21 @@ export class CandidateProfile {
           .subscribe({
             next: () => {
               Swal.fire(
-                'Deletado!',
-                'As aplicações foram removidas.',
+                'Deleted!',
+                'All applications have been deleted successfully.',
                 'success'
               );
               this.loadCandidateApplications();
             },
             error: (err) => {
-              Swal.fire('Erro!', 'Houve um problema ao deletar.', 'error');
+              Swal.fire('Erro!', 'There was a problem deleting.', 'error');
             },
           });
       }
     });
+  }
+
+  goBack() {
+    window.history.back();
   }
 }
