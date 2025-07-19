@@ -16,20 +16,20 @@ import { ViewApplication } from './pages/view-application/view-application';
 import { FaqComponent } from './pages/faq/faq';
 
 export const routes: Routes = [
+  { path: 'home', component: Home},
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'home', component: Home},
   //, canActivate: [AuthGuard] 
-  { path: 'profile-company', component: PrivateCompanyProfileComponent },
+  { path: 'profile-company', component: PrivateCompanyProfileComponent, canActivate: [AuthGuard], data: { roles: [2] } },
   { path: 'company/:id', component: CompanyProfileComponent},
-  { path : 'profile-candidate', component:CandidateProfile},
+  { path : 'profile-candidate', component:CandidateProfile, canActivate: [AuthGuard], data: { roles: [1] } },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'admin', component: Admin },
+  { path: 'admin', component: Admin, canActivate: [AuthGuard], data: { roles: [0] } },
   { path: 'offers', component: InternshipOffers },
-  { path: 'addoffers', component: AddInternshipOfferComponent },
-  { path: 'offers/:id', component: OffertView },
-  { path: 'company-offer/:id', component: OfferViewCompany },
-  { path: 'view-application/:id', component: ViewApplication },
+  { path: 'addoffers', component: AddInternshipOfferComponent, canActivate: [AuthGuard], data: { roles: [0, 2] } },
+  { path: 'offers/:id', component: OffertView, canActivate: [AuthGuard], data: { roles: [0, 1] } },
+  { path: 'company-offer/:id', component: OfferViewCompany, canActivate: [AuthGuard], data: { roles: [0, 2] } },
+  { path: 'view-application/:id', component: ViewApplication, canActivate: [AuthGuard], data: { roles: [0, 2] } },
   { path: 'faq', component: FaqComponent },
-  { path: '**', redirectTo: 'login' },
+  { path: '**', redirectTo: 'home' },
 ];
