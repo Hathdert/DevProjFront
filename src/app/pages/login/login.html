@@ -7,7 +7,7 @@
           <h2 class="text-center mb-4" style="color: #2C3E50;">Login</h2>
           <form #loginForm="ngForm" (ngSubmit)="onSubmit()" class="needs-validation" novalidate>
             <div class="mb-3">
-              <label for="username" class="form-label">Usuário</label>
+              <label for="username" class="form-label">User</label>
               <input type="email" id="username" name="username" [(ngModel)]="username" class="form-control"
                 placeholder="Insert email" required #usernameInput="ngModel"
                 [class.is-invalid]="usernameInput.invalid && usernameInput.touched" />
@@ -16,7 +16,7 @@
               </div>
             </div>
             <div class="mb-3">
-              <label for="password" class="form-label">Senha</label>
+              <label for="password" class="form-label">Password</label>
               <input type="password" id="password" name="password" [(ngModel)]="password" class="form-control"
                 placeholder="Insert password" required #passwordInput="ngModel"
                 [class.is-invalid]="passwordInput.invalid && passwordInput.touched" />
@@ -27,7 +27,7 @@
             <div class="text-center">
               <button type="submit" class="btn" style="background-color: #C0392B; color: white;"
                 [disabled]="loginForm.invalid">
-                Entrar
+                Login
               </button>
             </div>
           </form>
