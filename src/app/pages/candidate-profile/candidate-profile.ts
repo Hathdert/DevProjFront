@@ -130,24 +130,43 @@ export class CandidateProfile {
     },
   });
 }
-  deleteCandidate(password: string) {
-    this.candidateService.deleteCandidateByToken(password).subscribe({
-      next: () => {
-        localStorage.removeItem('jwtToken');
-        this.router.navigate(['/login']);
-      },
-      error: (err) => {
-        if (err.status === 200 || err.status === 204) {
+deleteCandidate(): void {
+  Swal.fire({
+    title: 'Are you sure?',
+    input: 'password',
+    inputLabel: 'Enter your password to confirm',
+    inputPlaceholder: 'Password',
+    text: 'This action will permanently delete the candidate and all related data!',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Yes, delete',
+    cancelButtonText: 'Cancel',
+    confirmButtonColor: '#d33'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      const password = result.value;
+      this.candidateService.deleteCandidateByToken(password).subscribe({
+        next: () => {
           localStorage.removeItem('jwtToken');
-          this.router.navigate(['/login']);
-        } else {
-          console.error('Error deleting candidate:', err);
-          alert('Failed to delete candidate. Check your password.');
-        }
-      },
-    });
-  }
-
+          Swal.fire('Deleted!', 'The candidate has been successfully removed.', 'success').then(() => {
+            this.router.navigate(['/login']);
+          });
+        },
+        error: (err) => {
+          if (err.status === 200 || err.status === 204) {
+            localStorage.removeItem('jwtToken');
+            Swal.fire('Deleted!', 'The candidate has been successfully removed.', 'success').then(() => {
+              this.router.navigate(['/login']);
+            });
+          } else {
+            console.error('Error deleting candidate:', err);
+            Swal.fire('Error!', 'Failed to delete candidate. Please check your password.', 'error');
+          }
+        },
+      });
+    }
+  });
+}
 
   deletarAplicacaoUnica(applicationId: number): void {
     Swal.fire({

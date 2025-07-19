@@ -109,22 +109,12 @@
               Cancel
             </button>
 
-            <button *ngIf="!isEditing && !showDeleteConfirm" class="btn btn-outline-dark ms-2"
-                            (click)="showDeleteConfirm = true">
-                            Delete Candidate
-                        </button>
-
-                        <div *ngIf="showDeleteConfirm" class="d-inline-block ms-2">
-                            <input type="password" [(ngModel)]="deletePassword" placeholder="Enter password"
-                                class="form-control d-inline-block w-auto" style="width:180px;" />
-                            <button class="btn btn-danger ms-1" (click)="deleteCandidate(deletePassword)">Confirm</button>
-                            <button class="btn btn-secondary ms-1"
-                                (click)="showDeleteConfirm = false; deletePassword = '';">Cancel</button>
-                        </div>
+     <button class="btn btn-danger" style="margin-left: 2%;" (click)="deleteCandidate()">Delete Candidate</button>
           </div>
         </div>
       </div>
     </div>
+  </div>
   </div>
 
   <!-- Application Cards -->
@@ -192,4 +182,3 @@
             </div>
         </div>
     </div> -->
-</div>
