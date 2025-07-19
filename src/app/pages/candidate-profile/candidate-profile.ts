@@ -13,7 +13,7 @@ import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-candidate-profile',
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [CommonModule, FormsModule],
   templateUrl: './candidate-profile.html',
   styleUrl: './candidate-profile.scss',
 })

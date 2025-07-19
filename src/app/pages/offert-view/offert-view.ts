@@ -112,6 +112,7 @@ export class OffertView {
   }
 
   submitApplication() {
+    console.log('OfferID', this.offer?.id);
     console.log('Submitting application:', this.application);
     this.applicationService.createApplication(this.application).subscribe({
       next: (createdApp) => {
