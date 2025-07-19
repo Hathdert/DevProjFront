@@ -18,6 +18,9 @@
     </ng-container>
     <!-- If navBarValue is '0' -->
     <ng-container *ngIf="navBarValue === '0'">
+      <button routerLink="/admin" class="btn btn-outline-light px-4 py-2 rounded-pill">
+        Admin Dashboard
+      </button>
       <button routerLink="/home" (click)="logout()" class="btn btn-outline-light px-4 py-2 rounded-pill">
         Logout
       </button>
